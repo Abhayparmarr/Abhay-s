@@ -1,676 +1,1132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#123c2c">
+<meta name="description" content="Discover India's hidden waterfalls, peaceful villages, forests, lakes and extraordinary destinations with TwoTrail A&H.">
+<title>TwoTrail A&H | Discover Hidden India</title>
 
-  <title>TwoTrail A&H | Explore the World</title>
+<style>
+:root {
+  --forest: #123c2c;
+  --deep: #09251b;
+  --green: #285b3e;
+  --sage: #dce7cf;
+  --cream: #f8f5e9;
+  --paper: #fffdf6;
+  --gold: #d5ae63;
+  --ink: #20352a;
+  --muted: #6d796c;
+  --radius: 22px;
+}
 
-  <meta name="description"
-        content="Discover beautiful destinations, plan adventures and explore the world with TwoTrail A&H.">
+* { box-sizing: border-box; }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+html { scroll-behavior: smooth; }
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
 
-  <link rel="stylesheet" href="assets/css/main.css">
+button, input, select { font: inherit; }
+
+button, a { -webkit-tap-highlight-color: transparent; }
+
+button { cursor: pointer; }
+
+a { color: inherit; text-decoration: none; }
+
+button:focus-visible, a:focus-visible, input:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.wrap { width: min(1180px, 92%); margin: auto; }
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(9,37,27,.96);
+  color: white;
+  border-bottom: 1px solid #ffffff20;
+  backdrop-filter: blur(15px);
+}
+
+.nav {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand {
+  font-family: Georgia, serif;
+  font-size: 23px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.brand span { color: #d5df9b; }
+
+.brand small {
+  display: block;
+  font: 10px system-ui, sans-serif;
+  letter-spacing: 2px;
+  color: #dce7cf;
+}
+
+nav { display: flex; align-items: center; gap: 22px; }
+
+nav a { font-size: 13px; color: #f0f1e7; }
+
+nav a:hover { color: var(--gold); }
+
+.nav-fav {
+  border: 1px solid #ffffff45;
+  border-radius: 50px;
+  padding: 9px 13px;
+  background: transparent;
+  color: white;
+}
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 500px;
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+  color: white;
+  background:
+    linear-gradient(90deg, #071f19e8 0%, #09251b9c 47%, #09251b10 100%),
+    linear-gradient(0deg, #09251b75, transparent 45%),
+    url("https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=2000&q=85")
+    center 48% / cover;
+}
+
+.hero-inner { padding: 75px 0 100px; }
+
+.eyebrow {
+  color: #e1d4a4;
+  letter-spacing: 3px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+h1 {
+  max-width: 750px;
+  font: clamp(43px, 7vw, 76px)/1.02 Georgia, serif;
+  margin: 18px 0;
+  text-shadow: 0 6px 24px #0007;
+}
+
+h1 em {
+  display: block;
+  color: #d9e4a8;
+  font-weight: 400;
+}
+
+.hero p {
+  max-width: 520px;
+  line-height: 1.8;
+  color: #f0f2e9;
+}
+
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+
+.btn {
+  min-height: 46px;
+  padding: 12px 20px;
+  border-radius: 50px;
+  border: 1px solid transparent;
+  background: var(--green);
+  color: white;
+  font-weight: 700;
+  transition: transform .25s, box-shadow .25s, background .25s;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px #0002;
+  background: #36734d;
+}
+
+.btn-gold { background: var(--gold); color: #182a1e; }
+
+.btn-outline { background: transparent; border-color: #ffffff90; }
+
+.search-shell {
+  position: relative;
+  z-index: 3;
+  margin-top: -34px;
+}
+
+.search-box {
+  display: grid;
+  grid-template-columns: minmax(160px, 2fr) 1fr auto;
+  gap: 10px;
+  padding: 14px;
+  background: var(--paper);
+  border: 1px solid #e2dfd0;
+  border-radius: 18px;
+  box-shadow: 0 15px 35px #243d2b1c;
+}
+
+.search-box input, .search-box select {
+  width: 100%;
+  min-width: 0;
+  min-height: 45px;
+  border: 1px solid #e3e4d7;
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: var(--ink);
+  background: white;
+}
+
+.categories {
+  display: flex;
+  gap: 12px;
+  padding: 27px 0 12px;
+  overflow-x: auto;
+}
+
+.category {
+  flex: 1 0 90px;
+  min-height: 95px;
+  border: 1px solid transparent;
+  background: transparent;
+  border-radius: 15px;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.category span {
+  width: 51px;
+  height: 51px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 9px;
+  background: var(--sage);
+  border-radius: 50%;
+  font-size: 24px;
+  transition: transform .25s;
+}
+
+.category:hover span { transform: translateY(-5px) rotate(-5deg); }
+
+.category.active {
+  background: #e8eddd;
+  border-color: #b6c8a5;
+}
+
+section { padding: 35px 0; }
+
+.section-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.section-head h2 {
+  margin: 0 0 5px;
+  font: clamp(25px, 4vw, 34px) Georgia, serif;
+}
+
+.section-head p { margin: 0; color: var(--muted); font-size: 14px; }
+
+.text-btn {
+  border: 0;
+  background: transparent;
+  color: var(--green);
+  font-weight: 800;
+  padding: 10px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  perspective: 1100px;
+}
+
+.card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #e4e2d4;
+  border-radius: var(--radius);
+  background: var(--paper);
+  box-shadow: 0 5px 13px #1e3b2810;
+  transform-style: preserve-3d;
+  transition: transform .3s, box-shadow .3s;
+}
+
+.card:hover {
+  transform: translateY(-7px) rotateX(2deg);
+  box-shadow: 0 18px 30px #183d281c;
+}
+
+.card-image {
+  position: relative;
+  height: 205px;
+  background: #d7e0d0;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s;
+}
+
+.card:hover .card-image img { transform: scale(1.06); }
+
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 6px 10px;
+  border-radius: 50px;
+  color: white;
+  background: #123c2ce8;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.heart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 39px;
+  height: 39px;
+  border-radius: 50%;
+  border: 1px solid #ffffff85;
+  background: #102c2199;
+  color: white;
+  font-size: 20px;
+}
+
+.heart.saved { color: #ffb6a8; background: #522a25e8; }
+
+.card-body { padding: 17px; }
+
+.location { font-size: 11px; color: var(--green); font-weight: 800; }
+
+.card h3 { margin: 8px 0; font: 24px Georgia, serif; }
+
+.card-body p { color: var(--muted); font-size: 13px; line-height: 1.7; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+
+.tag {
+  padding: 5px 9px;
+  border-radius: 50px;
+  background: #e8eddf;
+  color: #34543a;
+  font-size: 11px;
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  border-top: 1px solid #e8e6da;
+  padding-top: 12px;
+  font-size: 12px;
+}
+
+.rating { color: #9a6c18; font-weight: 800; }
+
+.price { font-weight: 800; color: var(--green); }
+
+.empty {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 40px 20px;
+  border: 1px dashed #b8c4b0;
+  border-radius: 20px;
+}
+
+.empty h3 { font: 25px Georgia, serif; }
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 18px;
+}
+
+.feature {
+  position: relative;
+  isolation: isolate;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding: 24px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  color: white;
+  background: var(--forest);
+  box-shadow: 0 12px 28px #193b291b;
+  transition: transform .3s;
+}
+
+.feature:hover { transform: translateY(-5px); }
+
+.feature::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(0deg, #071e17f5, #071e1710 100%);
+}
+
+.feature img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+  transition: transform .5s;
+}
+
+.feature:hover img { transform: scale(1.05); }
+
+.feature h3 { margin: 0 0 8px; font: 27px Georgia, serif; }
+
+.feature p { font-size: 13px; line-height: 1.7; color: #f0f0e8; }
+
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 20px;
+}
+
+.tool {
+  background: var(--paper);
+  border: 1px solid #e2e1d3;
+  border-radius: var(--radius);
+  padding: 25px;
+  box-shadow: 0 7px 20px #1d3c2910;
+}
+
+.tool h3 { margin-top: 0; font: 28px Georgia, serif; }
+
+.tool > p { color: var(--muted); line-height: 1.7; font-size: 14px; }
+
+.form-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 13px; }
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+
+.field label { font-size: 12px; font-weight: 800; }
+
+.field input, .field select {
+  min-width: 0;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px;
+  border: 1px solid #d9ddcf;
+  border-radius: 9px;
+  background: white;
+}
+
+.result {
+  margin-top: 15px;
+  padding: 15px;
+  border-radius: 12px;
+  background: #e7edde;
+  color: var(--forest);
+  line-height: 1.7;
+}
+
+.result strong { font-size: 21px; }
+
+.planner-list { padding-left: 22px; line-height: 1.9; }
+
+.planner-list li { padding: 3px 0; }
+
+.remove-stop {
+  margin-left: 8px;
+  border: 0;
+  background: transparent;
+  color: #9b4135;
+  font-weight: 800;
+}
+
+.trust {
+  margin-top: 20px;
+  padding: 25px 0;
+  background: #e5ebd9;
+}
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 15px;
+}
+
+.trust-item { text-align: center; font-size: 13px; font-weight: 800; }
+
+.trust-item span { display: block; font-size: 24px; margin-bottom: 7px; }
+
+.trust-item small { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; }
+
+footer {
+  padding: 35px 0;
+  background: var(--deep);
+  color: white;
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+}
+
+footer p { color: #d2dfd0; font-size: 13px; }
+
+footer a { color: #e2d5a9; }
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  z-index: 50;
+  transform: translate(-50%, 20px);
+  opacity: 0;
+  pointer-events: none;
+  padding: 12px 18px;
+  border-radius: 12px;
+  color: white;
+  background: var(--deep);
+  box-shadow: 0 10px 25px #0003;
+  transition: .25s;
+  max-width: 90%;
+  text-align: center;
+}
+
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+@media (max-width: 850px) {
+  nav { gap: 12px; }
+  nav a { font-size: 11px; }
+  .cards { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .feature-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .feature:last-child { grid-column: 1/-1; }
+}
+
+@media (max-width: 600px) {
+  .nav { padding: 14px 0; flex-wrap: wrap; }
+  nav { order: 3; width: 100%; overflow-x: auto; padding: 8px 0; }
+  nav a { white-space: nowrap; font-size: 12px; }
+  .hero { min-height: 480px; background-position: center; }
+  .hero-inner { padding: 65px 0 80px; }
+  h1 { font-size: clamp(42px, 12vw, 60px); }
+  .search-box { grid-template-columns: 1fr; }
+  .search-box .btn { width: 100%; }
+  .cards, .feature-grid, .tool-grid { grid-template-columns: 1fr; }
+  .feature:last-child { grid-column: auto; }
+  .card-image { height: 220px; }
+  .section-head { align-items: start; }
+  .section-head h2 { font-size: 27px; }
+  .trust-grid { grid-template-columns: repeat(2,1fr); }
+  .form-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+  }
+}
+</style>
 </head>
 
 <body>
-
-  <header class="navbar">
-    <a class="brand" href="#home">
-      <span class="brand-icon">△</span>
-      <span>
-        <strong>TwoTrail <span>A&H</span></strong>
-        <small>TWO FRIENDS · ENDLESS TRAILS</small>
-      </span>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#home" aria-label="TwoTrail A&H home">
+      ⛰ TwoTrail <span>A&H</span>
+      <small>DISCOVER · EXPLORE · EXPERIENCE</small>
     </a>
-
-    <button class="menu-toggle" id="menuToggle"
-            aria-label="Toggle navigation"
-            aria-expanded="false">
-      ☰
-    </button>
-
-    <nav class="nav-links" id="navLinks">
+    <nav aria-label="Main navigation">
       <a href="#home">Home</a>
       <a href="#destinations">Destinations</a>
-      <a href="#experiences">Experiences</a>
+      <a href="#hidden">Hidden Gems</a>
       <a href="#planner">Trip Planner</a>
-      <a href="#about">About Us</a>
+      <a href="#budget">Budget</a>
     </nav>
-
-    <button class="icon-button" id="favoritesButton"
-            aria-label="Show saved destinations">
-      ♡ <span id="favoriteCount">0</span>
-    </button>
-  </header>
-
-  <main>
-
-    <!-- HERO -->
-
-    <section class="hero" id="home">
-      <div class="hero-overlay"></div>
-
-      <div class="hero-content">
-        <p class="eyebrow">YOUR NEXT ADVENTURE STARTS HERE</p>
-
-        <h1>
-          Explore the world<br>
-          with <span>TwoTrail A&H.</span>
-        </h1>
-
-        <p class="hero-description">
-          Two friends. One dream. Endless destinations.
-          Discover incredible places and create unforgettable memories.
-        </p>
-
-        <div class="hero-actions">
-          <a href="#destinations" class="button button-primary">
-            Start Exploring <span>→</span>
-          </a>
-
-          <a href="#about" class="button button-glass">
-            Our Story
-          </a>
-        </div>
-
-        <div class="hero-stats">
-          <div>
-            <strong>20+</strong>
-            <span>Dream Destinations</span>
-          </div>
-
-          <div>
-            <strong>∞</strong>
-            <span>New Adventures</span>
-          </div>
-
-          <div>
-            <strong>2</strong>
-            <span>Friends, One Dream</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="floating-card">
-        <span class="floating-icon">✦</span>
-        <div>
-          <strong>Your next chapter awaits</strong>
-          <p>Discover somewhere extraordinary.</p>
-        </div>
-      </div>
-
-      <a href="#destinations" class="scroll-cue">
-        SCROLL TO EXPLORE ↓
-      </a>
-    </section>
-
-    <!-- SEARCH -->
-
-    <section class="search-section">
-      <div class="search-panel">
-        <div class="search-heading">
-          <span class="search-icon">⌕</span>
-          <div>
-            <h2>Where will you go?</h2>
-            <p>Find your next favourite destination.</p>
-          </div>
-        </div>
-
-        <form id="searchForm" class="search-form">
-          <label class="search-field">
-            <span>DESTINATION</span>
-            <input
-              type="search"
-              id="destinationSearch"
-              placeholder="Try Bali, Kyoto, Manali..."
-              aria-label="Search destinations">
-          </label>
-
-          <label class="search-field">
-            <span>TRAVEL STYLE</span>
-            <select id="categoryFilter" aria-label="Filter by travel style">
-              <option value="all">All experiences</option>
-              <option value="Mountains">Mountains</option>
-              <option value="Beach">Beaches</option>
-              <option value="Culture">Culture</option>
-              <option value="Adventure">Adventure</option>
-            </select>
-          </label>
-
-          <button type="submit" class="button button-primary search-submit">
-            Search ↗
-          </button>
-        </form>
-      </div>
-    </section>
-
-    <!-- DESTINATIONS -->
-
-    <section class="section destinations-section" id="destinations">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">THE WORLD IS WAITING</p>
-          <h2>Popular <span>Destinations</span></h2>
-          <p class="section-description">
-            Handpicked places for your next unforgettable journey.
-          </p>
-        </div>
-
-        <button class="text-button" id="showAllButton">
-          Explore all destinations →
-        </button>
-      </div>
-
-      <p class="results-message" id="resultsMessage" aria-live="polite">
-        Discover your next adventure.
-      </p>
-
-      <div class="destination-grid" id="destinationGrid">
-
-        <article class="destination-card"
-                 data-name="Swiss Alps"
-                 data-category="Mountains">
-          <div class="destination-image image-swiss">
-            <span class="destination-tag">MOUNTAINS</span>
-            <button class="favorite-button" aria-label="Save Swiss Alps"
-                    aria-pressed="false">♡</button>
-            <span class="image-number">01</span>
-          </div>
-          <div class="destination-info">
-            <div>
-              <h3>Swiss Alps</h3>
-              <p>Switzerland · Europe</p>
-            </div>
-            <span class="destination-arrow">↗</span>
-          </div>
-          <p class="destination-description">
-            Snow-capped peaks, crystal-clear lakes and peaceful alpine villages.
-          </p>
-        </article>
-
-        <article class="destination-card"
-                 data-name="Bali"
-                 data-category="Beach">
-          <div class="destination-image image-bali">
-            <span class="destination-tag">BEACH</span>
-            <button class="favorite-button" aria-label="Save Bali"
-                    aria-pressed="false">♡</button>
-            <span class="image-number">02</span>
-          </div>
-          <div class="destination-info">
-            <div>
-              <h3>Bali</h3>
-              <p>Indonesia · Asia</p>
-            </div>
-            <span class="destination-arrow">↗</span>
-          </div>
-          <p class="destination-description">
-            Tropical beaches, green rice terraces and spectacular sunsets.
-          </p>
-        </article>
-
-        <article class="destination-card"
-                 data-name="Manali"
-                 data-category="Adventure">
-          <div class="destination-image image-manali">
-            <span class="destination-tag">ADVENTURE</span>
-            <button class="favorite-button" aria-label="Save Manali"
-                    aria-pressed="false">♡</button>
-            <span class="image-number">03</span>
-          </div>
-          <div class="destination-info">
-            <div>
-              <h3>Manali</h3>
-              <p>Himachal Pradesh · India</p>
-            </div>
-            <span class="destination-arrow">↗</span>
-          </div>
-          <p class="destination-description">
-            Mountain scenery, forest trails and unforgettable Himalayan views.
-          </p>
-        </article>
-
-        <article class="destination-card"
-                 data-name="Kyoto"
-                 data-category="Culture">
-          <div class="destination-image image-kyoto">
-            <span class="destination-tag">CULTURE</span>
-            <button class="favorite-button" aria-label="Save Kyoto"
-                    aria-pressed="false">♡</button>
-            <span class="image-number">04</span>
-          </div>
-          <div class="destination-info">
-            <div>
-              <h3>Kyoto</h3>
-              <p>Japan · Asia</p>
-            </div>
-            <span class="destination-arrow">↗</span>
-          </div>
-          <p class="destination-description">
-            Traditional temples, beautiful gardens and charming old streets.
-          </p>
-        </article>
-
-        <article class="destination-card"
-                 data-name="Dubai"
-                 data-category="Culture">
-          <div class="destination-image image-dubai">
-            <span class="destination-tag">CITY LIFE</span>
-            <button class="favorite-button" aria-label="Save Dubai"
-                    aria-pressed="false">♡</button>
-            <span class="image-number">05</span>
-          </div>
-          <div class="destination-info">
-            <div>
-              <h3>Dubai</h3>
-              <p>United Arab Emirates</p>
-            </div>
-            <span class="destination-arrow">↗</span>
-          </div>
-          <p class="destination-description">
-            Futuristic architecture, desert landscapes and vibrant city life.
-          </p>
-        </article>
-
-        <article class="destination-card"
-                 data-name="Goa"
-                 data-category="Beach">
-          <div class="destination-image image-goa">
-            <span class="destination-tag">BEACH</span>
-            <button class="favorite-button" aria-label="Save Goa"
-                    aria-pressed="false">♡</button>
-            <span class="image-number">06</span>
-          </div>
-          <div class="destination-info">
-            <div>
-              <h3>Goa</h3>
-              <p>India · Arabian Sea</p>
-            </div>
-            <span class="destination-arrow">↗</span>
-          </div>
-          <p class="destination-description">
-            Golden beaches, palm trees and colourful coastal towns.
-          </p>
-        </article>
-
-      </div>
-
-      <p id="emptyMessage" class="empty-message" hidden>
-        No destinations found. Try a different search.
-      </p>
-    </section>
-
-    <!-- EXPERIENCES -->
-
-    <section class="experiences-section" id="experiences">
-      <div class="section experience-intro">
-        <p class="eyebrow">MORE THAN JUST A HOLIDAY</p>
-        <h2>Travel your <span>own way.</span></h2>
-        <p class="section-description">
-          Whether you seek quiet mountain mornings or exciting new cities,
-          your journey should be yours.
-        </p>
-
-        <a href="#planner" class="button button-primary">
-          Plan Your Adventure →
-        </a>
-      </div>
-
-      <div class="experience-grid">
-        <article class="experience-card">
-          <span class="experience-icon">⌁</span>
-          <h3>Mountain Escapes</h3>
-          <p>Find peaceful landscapes, alpine lakes and scenic trails.</p>
-        </article>
-
-        <article class="experience-card">
-          <span class="experience-icon">☼</span>
-          <h3>Beach Getaways</h3>
-          <p>Explore tropical coastlines and watch the sun meet the sea.</p>
-        </article>
-
-        <article class="experience-card">
-          <span class="experience-icon">✧</span>
-          <h3>Culture & Discovery</h3>
-          <p>Experience new traditions, architecture and local stories.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- WORLD GLOBE SECTION -->
-<section class="globe-section section" id="world">
-  <div class="globe-heading">
-    <p class="eyebrow">OUR WORLD IS YOUR PLAYGROUND</p>
-    <h2>One planet. <span>Infinite possibilities.</span></h2>
-    <p>Discover beautiful destinations and plan your next adventure.</p>
+    <button class="nav-fav" id="showFavorites" type="button">♡ Favourites <span id="favCount">0</span></button>
   </div>
-  <div id="travelGlobe"></div>
-</section>
+</header>
 
-<script src="assets/js/globe.js"></script>
-    <!-- TRIP PLANNER -->
-
-    <section class="planner-section section" id="planner">
-      <div class="planner-copy">
-        <p class="eyebrow">YOUR JOURNEY, YOUR RULES</p>
-        <h2>Dream it.<br><span>Plan it. Live it.</span></h2>
-        <p>
-          Start building your next adventure. Choose a destination,
-          set your travel dates and give your trip a name.
-        </p>
+<main>
+  <section class="hero" id="home">
+    <div class="wrap hero-inner">
+      <div class="eyebrow">India's hidden travel universe</div>
+      <h1>Discover the India <em>Beyond the Obvious.</em></h1>
+      <p>From mist-covered mountains and hidden waterfalls to peaceful villages and ancient heritage—discover extraordinary places across India, one journey at a time.</p>
+      <div class="actions">
+        <a class="btn btn-gold" href="#destinations">Explore destinations ↗</a>
+        <button class="btn btn-outline" id="heroSurprise" type="button">✦ Surprise me, India!</button>
       </div>
+    </div>
+  </section>
 
-      <form class="planner-form" id="plannerForm">
-        <h3>Create a trip</h3>
+  <div class="wrap search-shell">
+    <form class="search-box" id="searchForm">
+      <input id="searchInput" type="search" placeholder="Search destinations, states, villages..." aria-label="Search destinations">
+      <select id="stateFilter" aria-label="Filter by state">
+        <option value="">All states</option>
+      </select>
+      <button class="btn" type="submit">Find places →</button>
+    </form>
+  </div>
 
-        <label>
-          Trip name
-          <input type="text" id="tripName"
-                 placeholder="e.g. Summer in the mountains"
-                 maxlength="80" required>
-        </label>
+  <div class="wrap">
+    <div class="categories" id="categories" aria-label="Destination categories">
+      <button class="category active" data-category=""><span>🌏</span>All places</button>
+      <button class="category" data-category="Mountains"><span>🏔️</span>Mountains</button>
+      <button class="category" data-category="Waterfalls"><span>💧</span>Waterfalls</button>
+      <button class="category" data-category="Forests"><span>🌲</span>Forests</button>
+      <button class="category" data-category="Lakes"><span>🌊</span>Lakes</button>
+      <button class="category" data-category="Villages"><span>🏡</span>Villages</button>
+      <button class="category" data-category="Beaches"><span>🏝️</span>Beaches</button>
+      <button class="category" data-category="Heritage"><span>🏛️</span>Heritage</button>
+      <button class="category" data-category="Culture"><span>🪷</span>Culture</button>
+    </div>
+  </div>
 
-        <label>
-          Destination
-          <select id="tripDestination" required>
-            <option value="">Choose a destination</option>
-            <option>Swiss Alps</option>
-            <option>Bali</option>
-            <option>Manali</option>
-            <option>Kyoto</option>
-            <option>Dubai</option>
-            <option>Goa</option>
-          </select>
-        </label>
-
-        <label>
-          Start date
-          <input type="date" id="tripDate" required>
-        </label>
-
-        <button class="button button-primary" type="submit">
-          Save My Trip →
-        </button>
-
-        <p class="form-note">
-          Your trip is saved in this browser on this device.
-        </p>
-
-        <div id="tripResult" class="trip-result" aria-live="polite"></div>
-      </form>
-    </section>
-
-    <!-- ABOUT -->
-
-    <section class="about-section" id="about">
-      <div class="about-inner section">
-        <div class="about-mark">T<span>A&H</span></div>
+  <section id="destinations">
+    <div class="wrap">
+      <div class="section-head">
         <div>
-          <p class="eyebrow">TWO FRIENDS. ONE DREAM.</p>
-          <h2>Every trail has a story.</h2>
-          <p>
-            We're Abhay and Hardik, the friends behind TwoTrail A&H.
-            We created this space to share our love of exploring,
-            discovering remarkable places and inspiring new adventures.
-          </p>
-          <a href="#destinations" class="text-button">
-            Find your next trail →
-          </a>
+          <h2>Places worth discovering</h2>
+          <p>Handpicked inspiration for your next Indian adventure.</p>
+        </div>
+        <button class="text-btn" id="resetFilters" type="button">View all ↗</button>
+      </div>
+      <div class="cards" id="destinationCards" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section id="hidden">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Find your kind of escape</h2>
+          <p>Step away from the ordinary and discover something new.</p>
         </div>
       </div>
-    </section>
+      <div class="feature-grid">
+        <article class="feature">
+          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=80" alt="Mountain peaks surrounded by clouds" loading="lazy">
+          <div class="eyebrow">Your next adventure</div>
+          <h3>Surprise Me, India!</h3>
+          <p>Let us pick a destination from our collection of Indian places.</p>
+          <button class="btn btn-gold" id="surpriseButton" type="button">Discover a place →</button>
+        </article>
+        <article class="feature">
+          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80" alt="Sunlight through a green forest" loading="lazy">
+          <div class="eyebrow">Choose your mood</div>
+          <h3>Find My Perfect Escape</h3>
+          <p>Pick the kind of landscape you love and explore matching destinations.</p>
+          <label for="moodSelect">What would you love to see?</label>
+          <select id="moodSelect" style="margin:10px 0;padding:11px;border-radius:9px;max-width:100%">
+            <option value="Mountains">Peaceful mountains</option>
+            <option value="Waterfalls">Hidden waterfalls</option>
+            <option value="Forests">Lush forests</option>
+            <option value="Lakes">Quiet lakes</option>
+            <option value="Heritage">History and heritage</option>
+            <option value="Beaches">Beautiful beaches</option>
+          </select>
+          <button class="btn btn-gold" id="moodButton" type="button">Find my escape →</button>
+        </article>
+        <article class="feature">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Scenic landscape on a journey" loading="lazy">
+          <div class="eyebrow">Plan with confidence</div>
+          <h3>Your Journey, Your Way</h3>
+          <p>Build a personal list of places to visit and estimate your trip costs.</p>
+          <a class="btn btn-gold" href="#planner">Start planning →</a>
+        </article>
+      </div>
+    </div>
+  </section>
 
-  </main>
+  <section>
+    <div class="wrap tool-grid">
+      <div class="tool" id="budget">
+        <div class="eyebrow">Plan your spending</div>
+        <h3>💰 Travel Budget Calculator</h3>
+        <p>Estimate a trip budget for your group. These are planning estimates, not live quotes.</p>
+        <form id="budgetForm">
+          <div class="form-grid">
+            <div class="field">
+              <label for="travellers">Number of travellers</label>
+              <input id="travellers" type="number" min="1" max="30" value="2" required>
+            </div>
+            <div class="field">
+              <label for="days">Trip length (days)</label>
+              <input id="days" type="number" min="1" max="60" value="3" required>
+            </div>
+            <div class="field">
+              <label for="stayCost">Stay per person/night (₹)</label>
+              <input id="stayCost" type="number" min="0" max="1000000" value="1200" required>
+            </div>
+            <div class="field">
+              <label for="foodCost">Food per person/day (₹)</label>
+              <input id="foodCost" type="number" min="0" max="100000" value="500" required>
+            </div>
+            <div class="field" style="grid-column:1/-1">
+              <label for="transportCost">Total transport for the group (₹)</label>
+              <input id="transportCost" type="number" min="0" max="100000000" value="3000" required>
+            </div>
+          </div>
+          <button class="btn" style="margin-top:16px" type="submit">Calculate estimate →</button>
+        </form>
+        <div class="result" id="budgetResult" aria-live="polite">Your estimated trip cost will appear here.</div>
+      </div>
 
-  <footer class="footer">
-    <a class="brand footer-brand" href="#home">
-      <span class="brand-icon">△</span>
-      <span>
-        <strong>TwoTrail <span>A&H</span></strong>
-        <small>TWO FRIENDS · ENDLESS TRAILS</small>
-      </span>
-    </a>
+      <div class="tool" id="planner">
+        <div class="eyebrow">Create your own route</div>
+        <h3>🗺️ My Trip Planner</h3>
+        <p>Make a personal itinerary by adding destinations from our collection. Your list is saved in this browser.</p>
+        <form id="plannerForm">
+          <div class="field">
+            <label for="placeSelect">Choose a destination</label>
+            <select id="placeSelect"></select>
+          </div>
+          <div class="actions">
+            <button class="btn" type="submit">Add to my trip +</button>
+            <button class="btn btn-outline" id="clearTrip" type="button" style="color:var(--forest);border-color:#b9c8b6">Clear trip</button>
+          </div>
+        </form>
+        <ol class="planner-list" id="tripList" aria-live="polite"></ol>
+        <div class="result" id="tripSummary">Your itinerary is ready to begin.</div>
+        <button class="btn" id="downloadTrip" type="button" style="margin-top:12px">Download itinerary</button>
+      </div>
+    </div>
+  </section>
+</main>
 
-    <p>Made for the love of exploring. © <span id="currentYear"></span> TwoTrail A&H.</p>
+<div class="trust">
+  <div class="wrap trust-grid">
+    <div class="trust-item"><span>🌿</span>Discover responsibly<small>Respect nature and local culture</small></div>
+    <div class="trust-item"><span>🧭</span>Explore thoughtfully<small>Research before travelling</small></div>
+    <div class="trust-item"><span>₹</span>Plan your budget<small>Understand estimated expenses</small></div>
+    <div class="trust-item"><span>♡</span>Keep your favourites<small>Save places in your browser</small></div>
+  </div>
+</div>
 
-    <a href="#home" class="back-top">Back to top ↑</a>
-  </footer>
+<footer>
+  <div class="wrap footer-inner">
+    <div class="brand">⛰ TwoTrail <span>A&H</span><small>DISCOVER · EXPLORE · EXPERIENCE</small></div>
+    <p>Because the best stories are found beyond the obvious.</p>
+    <a href="#home">Back to the top ↑</a>
+  </div>
+</footer>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script>
-    const grid = document.getElementById("destinationGrid");
-    const cards = [...grid.querySelectorAll(".destination-card")];
-    const searchInput = document.getElementById("destinationSearch");
-    const categoryFilter = document.getElementById("categoryFilter");
-    const resultsMessage = document.getElementById("resultsMessage");
-    const emptyMessage = document.getElementById("emptyMessage");
-    const favoriteCount = document.getElementById("favoriteCount");
-    const toast = document.getElementById("toast");
+<script>
+(() => {
+  "use strict";
 
-    document.getElementById("currentYear").textContent =
-      new Date().getFullYear();
+  const destinations = [
+    {
+      id:"jibhi", name:"Jibhi", state:"Himachal Pradesh",
+      category:"Mountains", tags:["Villages","Nature"],
+      description:"A forest-framed mountain village known for cedar trees, riverside walks and relaxed Himalayan scenery.",
+      image:"https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=900&q=80",
+      rating:"4.7", price:1800, badge:"Mountain escape"
+    },
+    {
+      id:"nongkhyllem", name:"Nohkalikai Falls", state:"Meghalaya",
+      category:"Waterfalls", tags:["Nature","Adventure"],
+      description:"A dramatic waterfall near Cherrapunji, best visited after checking local weather and access conditions.",
+      image:"https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=900&q=80",
+      rating:"4.8", price:1400, badge:"Waterfall wonder"
+    },
+    {
+      id:"tsomoriri", name:"Tso Moriri", state:"Ladakh",
+      category:"Lakes", tags:["Mountains","Wildlife"],
+      description:"A high-altitude lake surrounded by stark mountains and extraordinary open landscapes.",
+      image:"https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=80",
+      rating:"4.8", price:3200, badge:"High-altitude escape"
+    },
+    {
+      id:"coorg", name:"Coorg", state:"Karnataka",
+      category:"Forests", tags:["Coffee","Nature"],
+      description:"Explore coffee-growing hills, shaded trails, local food and green countryside.",
+      image:"https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=900&q=80",
+      rating:"4.6", price:2200, badge:"Green getaway"
+    },
+    {
+      id:"gokarna", name:"Gokarna", state:"Karnataka",
+      category:"Beaches", tags:["Relaxation","Coast"],
+      description:"A coastal town with beaches, rocky headlands and a quieter pace away from major city life.",
+      image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80",
+      rating:"4.6", price:2000, badge:"Coastal calm"
+    },
+    {
+      id:"hampi", name:"Hampi", state:"Karnataka",
+      category:"Heritage", tags:["History","Culture"],
+      description:"Explore extraordinary temple architecture, historic ruins and a landscape of giant boulders.",
+      image:"https://images.unsplash.com/photo-1600100397608-f0106bfa1c6a?auto=format&fit=crop&w=900&q=80",
+      rating:"4.8", price:1900, badge:"Living history"
+    },
+    {
+      id:"tawang", name:"Tawang", state:"Arunachal Pradesh",
+      category:"Mountains", tags:["Culture","Monasteries"],
+      description:"A Himalayan destination known for mountain scenery and rich monastery traditions. Check permits before travel.",
+      image:"https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=80",
+      rating:"4.7", price:2800, badge:"Himalayan culture"
+    },
+    {
+      id:"ziro", name:"Ziro Valley", state:"Arunachal Pradesh",
+      category:"Villages", tags:["Culture","Nature"],
+      description:"A scenic valley with agricultural landscapes and distinctive local cultural traditions.",
+      image:"https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=900&q=80",
+      rating:"4.6", price:2400, badge:"Valley discovery"
+    },
+    {
+      id:"orchha", name:"Orchha", state:"Madhya Pradesh",
+      category:"Heritage", tags:["History","Rivers"],
+      description:"A historic riverside town with palaces, cenotaphs and remarkable Bundela-era architecture.",
+      image:"https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=900&q=80",
+      rating:"4.6", price:1600, badge:"Heritage trails"
+    }
+  ];
 
-    // Mobile navigation
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
+  const $ = id => document.getElementById(id);
+  const validIds = new Set(destinations.map(d => d.id));
+  const safeRead = (key, fallback) => {
+    try {
+      const value = JSON.parse(localStorage.getItem(key));
+      return value === null ? fallback : value;
+    } catch (_) { return fallback; }
+  };
 
-    menuToggle.addEventListener("click", () => {
-      const isOpen = navLinks.classList.toggle("nav-open");
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
+  let favorites = safeRead("twotrail-favorites", []);
+  if (!Array.isArray(favorites)) favorites = [];
+  favorites = favorites.filter(id => validIds.has(id));
+
+  let trip = safeRead("twotrail-trip", []);
+  if (!Array.isArray(trip)) trip = [];
+  trip = trip.filter(id => validIds.has(id));
+
+  let category = "";
+  let favoritesOnly = false;
+  let searchTerm = "";
+  let selectedState = "";
+
+  function save(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); }
+    catch (_) { notify("Browser storage is unavailable; changes may not persist."); }
+  }
+
+  function notify(message) {
+    const toast = $("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    clearTimeout(notify.timer);
+    notify.timer = setTimeout(() => toast.classList.remove("show"), 2600);
+  }
+
+  function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, ch => ({
+      "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+    })[ch]);
+  }
+
+  function cardHTML(d) {
+    const saved = favorites.includes(d.id);
+    return `
+      <article class="card">
+        <div class="card-image">
+          <img src="${d.image}" alt="${escapeHTML(d.name)} landscape" loading="lazy">
+          <span class="badge">${escapeHTML(d.badge)}</span>
+          <button class="heart ${saved ? "saved" : ""}" type="button"
+            data-favorite="${d.id}" aria-label="${saved ? "Remove from" : "Add to"} favourites"
+            aria-pressed="${saved}">${saved ? "♥" : "♡"}</button>
+        </div>
+        <div class="card-body">
+          <div class="location">⌖ ${escapeHTML(d.state)}</div>
+          <h3>${escapeHTML(d.name)}</h3>
+          <p>${escapeHTML(d.description)}</p>
+          <div class="tags">
+            <span class="tag">${escapeHTML(d.category)}</span>
+            ${d.tags.map(t => `<span class="tag">${escapeHTML(t)}</span>`).join("")}
+          </div>
+          <div class="card-bottom">
+            <span class="rating">★ ${escapeHTML(d.rating)} <span style="color:var(--muted);font-weight:400">editorial guide</span></span>
+            <span class="price">From ₹${d.price.toLocaleString("en-IN")}*</span>
+          </div>
+        </div>
+      </article>`;
+  }
+
+  function renderDestinations() {
+    const filtered = destinations.filter(d => {
+      const matchesCategory = !category || d.category === category || d.tags.includes(category);
+      const matchesSearch = !searchTerm ||
+        [d.name, d.state, d.category, d.description, ...d.tags]
+          .join(" ").toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesState = !selectedState || d.state === selectedState;
+      const matchesFav = !favoritesOnly || favorites.includes(d.id);
+      return matchesCategory && matchesSearch && matchesState && matchesFav;
     });
 
-    navLinks.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("nav-open");
-        menuToggle.setAttribute("aria-expanded", "false");
-      });
-    });
+    $("destinationCards").innerHTML = filtered.length
+      ? filtered.map(cardHTML).join("")
+      : `<div class="empty"><h3>No places found just yet</h3><p>Try another keyword, state or category.</p><button class="btn" id="emptyReset" type="button">Show all places</button></div>`;
 
-    // Search and filter
-    function filterDestinations() {
-      const query = searchInput.value.trim().toLowerCase();
-      const category = categoryFilter.value;
-      let visible = 0;
+    $("favCount").textContent = favorites.length;
+    updateStateOptions();
+    updatePlaceOptions();
+  }
 
-      cards.forEach(card => {
-        const name = card.dataset.name.toLowerCase();
-        const description = card.textContent.toLowerCase();
-        const matchesSearch =
-          !query || name.includes(query) || description.includes(query);
-        const matchesCategory =
-          category === "all" || card.dataset.category === category;
+  function updateStateOptions() {
+    const select = $("stateFilter");
+    const current = selectedState;
+    const states = [...new Set(destinations.map(d => d.state))].sort();
+    select.innerHTML = `<option value="">All states</option>` +
+      states.map(s => `<option value="${escapeHTML(s)}">${escapeHTML(s)}</option>`).join("");
+    select.value = current;
+  }
 
-        const show = matchesSearch && matchesCategory;
-        card.hidden = !show;
-        if (show) visible++;
-      });
+  function updatePlaceOptions() {
+    const select = $("placeSelect");
+    const current = select.value;
+    select.innerHTML = destinations.map(d =>
+      `<option value="${d.id}">${escapeHTML(d.name)} — ${escapeHTML(d.state)}</option>`
+    ).join("");
+    if (validIds.has(current)) select.value = current;
+  }
 
-      resultsMessage.textContent =
-        `${visible} destination${visible === 1 ? "" : "s"} found`;
+  function renderTrip() {
+    $("tripList").innerHTML = trip.length
+      ? trip.map((id, i) => {
+          const d = destinations.find(item => item.id === id);
+          return `<li>${i + 1}. ${escapeHTML(d.name)} <small>(${escapeHTML(d.state)})</small>
+            <button class="remove-stop" type="button" data-remove="${id}" aria-label="Remove ${escapeHTML(d.name)}">Remove</button></li>`;
+        }).join("")
+      : "<li>Your itinerary is empty. Add a place to begin.</li>";
 
-      emptyMessage.hidden = visible !== 0;
+    $("tripSummary").textContent = trip.length
+      ? `Your itinerary contains ${trip.length} ${trip.length === 1 ? "destination" : "destinations"}. This is a saved place list, not a route-optimized itinerary.`
+      : "Your itinerary is ready to begin.";
+
+    save("twotrail-trip", trip);
+  }
+
+  function toggleFavorite(id) {
+    if (!validIds.has(id)) return;
+    favorites = favorites.includes(id)
+      ? favorites.filter(item => item !== id)
+      : [...favorites, id];
+    save("twotrail-favorites", favorites);
+    renderDestinations();
+    notify(favorites.includes(id) ? "Added to your favourites ♥" : "Removed from favourites");
+  }
+
+  function surprise() {
+    const pool = destinations.filter(d =>
+      (!category || d.category === category || d.tags.includes(category)) &&
+      (!selectedState || d.state === selectedState)
+    );
+    const choices = pool.length ? pool : destinations;
+    const d = choices[Math.floor(Math.random() * choices.length)];
+    favoritesOnly = false;
+    searchTerm = "";
+    $("searchInput").value = "";
+    category = "";
+    selectedState = "";
+    document.querySelectorAll(".category").forEach(b =>
+      b.classList.toggle("active", b.dataset.category === "")
+    );
+    renderDestinations();
+    $("destinationCards").scrollIntoView({behavior:"smooth", block:"start"});
+    notify("Your next discovery: " + d.name + "!");
+  }
+
+  $("categories").addEventListener("click", event => {
+    const button = event.target.closest("[data-category]");
+    if (!button) return;
+    category = button.dataset.category;
+    favoritesOnly = false;
+    document.querySelectorAll(".category").forEach(b =>
+      b.classList.toggle("active", b === button)
+    );
+    renderDestinations();
+    $("destinations").scrollIntoView({behavior:"smooth", block:"start"});
+  });
+
+  $("destinationCards").addEventListener("click", event => {
+    const fav = event.target.closest("[data-favorite]");
+    if (fav) toggleFavorite(fav.dataset.favorite);
+    if (event.target.closest("#emptyReset")) resetFilters();
+  });
+
+  $("searchForm").addEventListener("submit", event => {
+    event.preventDefault();
+    searchTerm = $("searchInput").value.trim();
+    selectedState = $("stateFilter").value;
+    favoritesOnly = false;
+    renderDestinations();
+    $("destinations").scrollIntoView({behavior:"smooth", block:"start"});
+  });
+
+  $("stateFilter").addEventListener("change", () => {
+    selectedState = $("stateFilter").value;
+    renderDestinations();
+  });
+
+  function resetFilters() {
+    category = "";
+    searchTerm = "";
+    selectedState = "";
+    favoritesOnly = false;
+    $("searchInput").value = "";
+    $("stateFilter").value = "";
+    document.querySelectorAll(".category").forEach(b =>
+      b.classList.toggle("active", b.dataset.category === "")
+    );
+    renderDestinations();
+  }
+
+  $("resetFilters").addEventListener("click", resetFilters);
+  $("showFavorites").addEventListener("click", () => {
+    favoritesOnly = true;
+    category = "";
+    searchTerm = "";
+    selectedState = "";
+    $("searchInput").value = "";
+    $("stateFilter").value = "";
+    document.querySelectorAll(".category").forEach(b =>
+      b.classList.toggle("active", b.dataset.category === "")
+    );
+    renderDestinations();
+    $("destinations").scrollIntoView({behavior:"smooth", block:"start"});
+    if (!favorites.length) notify("Tap a heart on any destination to save it.");
+  });
+
+  $("heroSurprise").addEventListener("click", surprise);
+  $("surpriseButton").addEventListener("click", surprise);
+
+  $("moodButton").addEventListener("click", () => {
+    category = $("moodSelect").value;
+    favoritesOnly = false;
+    searchTerm = "";
+    selectedState = "";
+    $("searchInput").value = "";
+    $("stateFilter").value = "";
+    document.querySelectorAll(".category").forEach(b =>
+      b.classList.toggle("active", b.dataset.category === category)
+    );
+    renderDestinations();
+    $("destinations").scrollIntoView({behavior:"smooth", block:"start"});
+  });
+
+  $("budgetForm").addEventListener("submit", event => {
+    event.preventDefault();
+    const travellers = Number($("travellers").value);
+    const days = Number($("days").value);
+    const stay = Number($("stayCost").value);
+    const food = Number($("foodCost").value);
+    const transport = Number($("transportCost").value);
+    const values = [travellers, days, stay, food, transport];
+
+    if (values.some(v => !Number.isFinite(v) || v < 0) ||
+        travellers < 1 || travellers > 30 ||
+        days < 1 || days > 60 ||
+        stay > 1000000 || food > 100000 || transport > 100000000) {
+      $("budgetResult").textContent = "Please enter valid positive group and trip details.";
+      return;
     }
 
-    document.getElementById("searchForm").addEventListener("submit", event => {
-      event.preventDefault();
-      filterDestinations();
-      document.getElementById("destinations").scrollIntoView({
-        behavior: "smooth"
-      });
-    });
+    const lodging = travellers * days * stay;
+    const meals = travellers * days * food;
+    const total = lodging + meals + transport;
 
-    searchInput.addEventListener("input", filterDestinations);
-    categoryFilter.addEventListener("change", filterDestinations);
+    $("budgetResult").innerHTML =
+      `Estimated group total: <strong>₹${total.toLocaleString("en-IN")}</strong><br>` +
+      `Stay: ₹${lodging.toLocaleString("en-IN")} · Food: ₹${meals.toLocaleString("en-IN")} · Transport: ₹${transport.toLocaleString("en-IN")}<br>` +
+      `Approx. per person: ₹${Math.round(total / travellers).toLocaleString("en-IN")}<br><small>Estimate only. Add any other costs such as permits, activities and emergency funds.</small>`;
+  });
 
-    document.getElementById("showAllButton").addEventListener("click", () => {
-      searchInput.value = "";
-      categoryFilter.value = "all";
-      filterDestinations();
-    });
-
-    // Local browser storage, with safe fallback
-    function readStoredArray(key) {
-      try {
-        const value = JSON.parse(localStorage.getItem(key) || "[]");
-        return Array.isArray(value) ? value : [];
-      } catch {
-        return [];
-      }
+  $("plannerForm").addEventListener("submit", event => {
+    event.preventDefault();
+    const id = $("placeSelect").value;
+    if (!validIds.has(id)) return;
+    if (trip.includes(id)) {
+      notify("That destination is already in your itinerary.");
+      return;
     }
+    trip.push(id);
+    renderTrip();
+    notify("Destination added to your trip!");
+  });
 
-    let favorites = readStoredArray("twotrail-favorites");
-    let trips = readStoredArray("twotrail-trips");
+  $("tripList").addEventListener("click", event => {
+    const button = event.target.closest("[data-remove]");
+    if (!button) return;
+    trip = trip.filter(id => id !== button.dataset.remove);
+    renderTrip();
+  });
 
-    function updateFavorites() {
-      favoriteCount.textContent = favorites.length;
+  $("clearTrip").addEventListener("click", () => {
+    trip = [];
+    renderTrip();
+    notify("Your itinerary has been cleared.");
+  });
 
-      cards.forEach(card => {
-        const button = card.querySelector(".favorite-button");
-        const saved = favorites.includes(card.dataset.name);
-        button.classList.toggle("is-favorite", saved);
-        button.textContent = saved ? "♥" : "♡";
-        button.setAttribute("aria-pressed", String(saved));
-      });
+  $("downloadTrip").addEventListener("click", () => {
+    if (!trip.length) {
+      notify("Add at least one destination before downloading.");
+      return;
     }
+    const lines = [
+      "TwoTrail A&H — My India Trip",
+      "================================",
+      "",
+      ...trip.map((id, i) => {
+        const d = destinations.find(item => item.id === id);
+        return `${i + 1}. ${d.name} — ${d.state}\n   ${d.description}`;
+      }),
+      "",
+      "Please independently verify access, weather, permits, local guidance and travel costs before departure."
+    ];
+    const blob = new Blob([lines.join("\n")], {type:"text/plain;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "twotrail-my-india-trip.txt";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  });
 
-    function showToast(message) {
-      toast.textContent = message;
-      toast.classList.add("toast-visible");
-
-      clearTimeout(showToast.timer);
-      showToast.timer = setTimeout(() => {
-        toast.classList.remove("toast-visible");
-      }, 2400);
-    }
-
-    function persistFavorites() {
-      try {
-        localStorage.setItem("twotrail-favorites", JSON.stringify(favorites));
-        return true;
-      } catch {
-        return false;
-      }
-    }
-
-    cards.forEach(card => {
-      const button = card.querySelector(".favorite-button");
-
-      button.addEventListener("click", () => {
-        const name = card.dataset.name;
-        const wasSaved = favorites.includes(name);
-
-        favorites = wasSaved
-          ? favorites.filter(item => item !== name)
-          : [...favorites, name];
-
-        const stored = persistFavorites();
-        updateFavorites();
-
-        showToast(
-          wasSaved
-            ? `${name} removed from favourites`
-            : `${name} added to favourites`
-        );
-
-        if (!stored) {
-          showToast("Browser storage unavailable; changes may not persist.");
-        }
-      });
-    });
-
-    document.getElementById("favoritesButton").addEventListener("click", () => {
-      const saved = cards.filter(card =>
-        favorites.includes(card.dataset.name)
-      );
-
-      if (saved.length === 0) {
-        showToast("Tap a heart on any destination to save it.");
-        return;
-      }
-
-      searchInput.value = "";
-      categoryFilter.value = "all";
-
-      cards.forEach(card => {
-        card.hidden = !favorites.includes(card.dataset.name);
-      });
-
-      resultsMessage.textContent = "Your saved destinations";
-      emptyMessage.hidden = true;
-
-      document.getElementById("destinations").scrollIntoView({
-        behavior: "smooth"
-      });
-    });
-
-    // Simple trip planner
-    const plannerForm = document.getElementById("plannerForm");
-    const tripDate = document.getElementById("tripDate");
-    const tripResult = document.getElementById("tripResult");
-
-    const today = new Date();
-    const localToday = [
-      today.getFullYear(),
-      String(today.getMonth() + 1).padStart(2, "0"),
-      String(today.getDate()).padStart(2, "0")
-    ].join("-");
-
-    tripDate.min = localToday;
-
-    function persistTrips() {
-      try {
-        localStorage.setItem("twotrail-trips", JSON.stringify(trips));
-        return true;
-      } catch {
-        return false;
-      }
-    }
-
-    plannerForm.addEventListener("submit", event => {
-      event.preventDefault();
-
-      const name = document.getElementById("tripName").value.trim();
-      const destination =
-        document.getElementById("tripDestination").value;
-      const date = tripDate.value;
-
-      if (!name || !destination || !date) {
-        tripResult.textContent = "Please complete all fields.";
-        return;
-      }
-
-      if (date < localToday) {
-        tripResult.textContent = "Choose today or a future date.";
-        return;
-      }
-
-      trips.push({ name, destination, date });
-
-      if (!persistTrips()) {
-        trips.pop();
-        tripResult.textContent =
-          "Browser storage is unavailable. Your trip could not be saved.";
-        return;
-      }
-
-      tripResult.textContent =
-        `Trip saved! "${name}" — ${destination}, ${date}.`;
-
-      showToast("Your trip has been saved!");
-      plannerForm.reset();
-      tripDate.min = localToday;
-    });
-
-    updateFavorites();
-    filterDestinations();
-  </script>
-
+  renderDestinations();
+  renderTrip();
+})();
+</script>
 </body>
 </html>

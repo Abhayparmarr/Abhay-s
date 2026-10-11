@@ -1,1132 +1,1682 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#123c2c">
-<meta name="description" content="Discover India's hidden waterfalls, peaceful villages, forests, lakes and extraordinary destinations with TwoTrail A&H.">
-<title>TwoTrail A&H | Discover Hidden India</title>
-
-<style>
-:root {
-  --forest: #123c2c;
-  --deep: #09251b;
-  --green: #285b3e;
-  --sage: #dce7cf;
-  --cream: #f8f5e9;
-  --paper: #fffdf6;
-  --gold: #d5ae63;
-  --ink: #20352a;
-  --muted: #6d796c;
-  --radius: 22px;
-}
-
-* { box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
-
-body {
-  margin: 0;
-  background: var(--cream);
-  color: var(--ink);
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-}
-
-button, input, select { font: inherit; }
-
-button, a { -webkit-tap-highlight-color: transparent; }
-
-button { cursor: pointer; }
-
-a { color: inherit; text-decoration: none; }
-
-button:focus-visible, a:focus-visible, input:focus-visible,
-select:focus-visible {
-  outline: 3px solid var(--gold);
-  outline-offset: 3px;
-}
-
-.wrap { width: min(1180px, 92%); margin: auto; }
-
-header {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  background: rgba(9,37,27,.96);
-  color: white;
-  border-bottom: 1px solid #ffffff20;
-  backdrop-filter: blur(15px);
-}
-
-.nav {
-  min-height: 76px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.brand {
-  font-family: Georgia, serif;
-  font-size: 23px;
-  font-weight: 800;
-  white-space: nowrap;
-}
-
-.brand span { color: #d5df9b; }
-
-.brand small {
-  display: block;
-  font: 10px system-ui, sans-serif;
-  letter-spacing: 2px;
-  color: #dce7cf;
-}
-
-nav { display: flex; align-items: center; gap: 22px; }
-
-nav a { font-size: 13px; color: #f0f1e7; }
-
-nav a:hover { color: var(--gold); }
-
-.nav-fav {
-  border: 1px solid #ffffff45;
-  border-radius: 50px;
-  padding: 9px 13px;
-  background: transparent;
-  color: white;
-}
-
-.hero {
-  position: relative;
-  isolation: isolate;
-  min-height: 500px;
-  display: grid;
-  align-items: center;
-  overflow: hidden;
-  color: white;
-  background:
-    linear-gradient(90deg, #071f19e8 0%, #09251b9c 47%, #09251b10 100%),
-    linear-gradient(0deg, #09251b75, transparent 45%),
-    url("https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=2000&q=85")
-    center 48% / cover;
-}
-
-.hero-inner { padding: 75px 0 100px; }
-
-.eyebrow {
-  color: #e1d4a4;
-  letter-spacing: 3px;
-  font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-h1 {
-  max-width: 750px;
-  font: clamp(43px, 7vw, 76px)/1.02 Georgia, serif;
-  margin: 18px 0;
-  text-shadow: 0 6px 24px #0007;
-}
-
-h1 em {
-  display: block;
-  color: #d9e4a8;
-  font-weight: 400;
-}
-
-.hero p {
-  max-width: 520px;
-  line-height: 1.8;
-  color: #f0f2e9;
-}
-
-.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
-
-.btn {
-  min-height: 46px;
-  padding: 12px 20px;
-  border-radius: 50px;
-  border: 1px solid transparent;
-  background: var(--green);
-  color: white;
-  font-weight: 700;
-  transition: transform .25s, box-shadow .25s, background .25s;
-}
-
-.btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 24px #0002;
-  background: #36734d;
-}
-
-.btn-gold { background: var(--gold); color: #182a1e; }
-
-.btn-outline { background: transparent; border-color: #ffffff90; }
-
-.search-shell {
-  position: relative;
-  z-index: 3;
-  margin-top: -34px;
-}
-
-.search-box {
-  display: grid;
-  grid-template-columns: minmax(160px, 2fr) 1fr auto;
-  gap: 10px;
-  padding: 14px;
-  background: var(--paper);
-  border: 1px solid #e2dfd0;
-  border-radius: 18px;
-  box-shadow: 0 15px 35px #243d2b1c;
-}
-
-.search-box input, .search-box select {
-  width: 100%;
-  min-width: 0;
-  min-height: 45px;
-  border: 1px solid #e3e4d7;
-  border-radius: 10px;
-  padding: 10px 12px;
-  color: var(--ink);
-  background: white;
-}
-
-.categories {
-  display: flex;
-  gap: 12px;
-  padding: 27px 0 12px;
-  overflow-x: auto;
-}
-
-.category {
-  flex: 1 0 90px;
-  min-height: 95px;
-  border: 1px solid transparent;
-  background: transparent;
-  border-radius: 15px;
-  color: var(--ink);
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.category span {
-  width: 51px;
-  height: 51px;
-  display: grid;
-  place-items: center;
-  margin: 0 auto 9px;
-  background: var(--sage);
-  border-radius: 50%;
-  font-size: 24px;
-  transition: transform .25s;
-}
-
-.category:hover span { transform: translateY(-5px) rotate(-5deg); }
-
-.category.active {
-  background: #e8eddd;
-  border-color: #b6c8a5;
-}
-
-section { padding: 35px 0; }
-
-.section-head {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 15px;
-  margin-bottom: 20px;
-}
-
-.section-head h2 {
-  margin: 0 0 5px;
-  font: clamp(25px, 4vw, 34px) Georgia, serif;
-}
-
-.section-head p { margin: 0; color: var(--muted); font-size: 14px; }
-
-.text-btn {
-  border: 0;
-  background: transparent;
-  color: var(--green);
-  font-weight: 800;
-  padding: 10px;
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-  perspective: 1100px;
-}
-
-.card {
-  min-width: 0;
-  overflow: hidden;
-  border: 1px solid #e4e2d4;
-  border-radius: var(--radius);
-  background: var(--paper);
-  box-shadow: 0 5px 13px #1e3b2810;
-  transform-style: preserve-3d;
-  transition: transform .3s, box-shadow .3s;
-}
-
-.card:hover {
-  transform: translateY(-7px) rotateX(2deg);
-  box-shadow: 0 18px 30px #183d281c;
-}
-
-.card-image {
-  position: relative;
-  height: 205px;
-  background: #d7e0d0;
-  overflow: hidden;
-}
-
-.card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform .5s;
-}
-
-.card:hover .card-image img { transform: scale(1.06); }
-
-.badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  padding: 6px 10px;
-  border-radius: 50px;
-  color: white;
-  background: #123c2ce8;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.heart {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 39px;
-  height: 39px;
-  border-radius: 50%;
-  border: 1px solid #ffffff85;
-  background: #102c2199;
-  color: white;
-  font-size: 20px;
-}
-
-.heart.saved { color: #ffb6a8; background: #522a25e8; }
-
-.card-body { padding: 17px; }
-
-.location { font-size: 11px; color: var(--green); font-weight: 800; }
-
-.card h3 { margin: 8px 0; font: 24px Georgia, serif; }
-
-.card-body p { color: var(--muted); font-size: 13px; line-height: 1.7; }
-
-.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
-
-.tag {
-  padding: 5px 9px;
-  border-radius: 50px;
-  background: #e8eddf;
-  color: #34543a;
-  font-size: 11px;
-}
-
-.card-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  border-top: 1px solid #e8e6da;
-  padding-top: 12px;
-  font-size: 12px;
-}
-
-.rating { color: #9a6c18; font-weight: 800; }
-
-.price { font-weight: 800; color: var(--green); }
-
-.empty {
-  grid-column: 1/-1;
-  text-align: center;
-  padding: 40px 20px;
-  border: 1px dashed #b8c4b0;
-  border-radius: 20px;
-}
-
-.empty h3 { font: 25px Georgia, serif; }
-
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0,1fr));
-  gap: 18px;
-}
-
-.feature {
-  position: relative;
-  isolation: isolate;
-  min-height: 260px;
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  padding: 24px;
-  border-radius: var(--radius);
-  overflow: hidden;
-  color: white;
-  background: var(--forest);
-  box-shadow: 0 12px 28px #193b291b;
-  transition: transform .3s;
-}
-
-.feature:hover { transform: translateY(-5px); }
-
-.feature::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(0deg, #071e17f5, #071e1710 100%);
-}
-
-.feature img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -2;
-  transition: transform .5s;
-}
-
-.feature:hover img { transform: scale(1.05); }
-
-.feature h3 { margin: 0 0 8px; font: 27px Georgia, serif; }
-
-.feature p { font-size: 13px; line-height: 1.7; color: #f0f0e8; }
-
-.tool-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
-  gap: 20px;
-}
-
-.tool {
-  background: var(--paper);
-  border: 1px solid #e2e1d3;
-  border-radius: var(--radius);
-  padding: 25px;
-  box-shadow: 0 7px 20px #1d3c2910;
-}
-
-.tool h3 { margin-top: 0; font: 28px Georgia, serif; }
-
-.tool > p { color: var(--muted); line-height: 1.7; font-size: 14px; }
-
-.form-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 13px; }
-
-.field { display: flex; flex-direction: column; gap: 6px; }
-
-.field label { font-size: 12px; font-weight: 800; }
-
-.field input, .field select {
-  min-width: 0;
-  width: 100%;
-  min-height: 44px;
-  padding: 10px;
-  border: 1px solid #d9ddcf;
-  border-radius: 9px;
-  background: white;
-}
-
-.result {
-  margin-top: 15px;
-  padding: 15px;
-  border-radius: 12px;
-  background: #e7edde;
-  color: var(--forest);
-  line-height: 1.7;
-}
-
-.result strong { font-size: 21px; }
-
-.planner-list { padding-left: 22px; line-height: 1.9; }
-
-.planner-list li { padding: 3px 0; }
-
-.remove-stop {
-  margin-left: 8px;
-  border: 0;
-  background: transparent;
-  color: #9b4135;
-  font-weight: 800;
-}
-
-.trust {
-  margin-top: 20px;
-  padding: 25px 0;
-  background: #e5ebd9;
-}
-
-.trust-grid {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 15px;
-}
-
-.trust-item { text-align: center; font-size: 13px; font-weight: 800; }
-
-.trust-item span { display: block; font-size: 24px; margin-bottom: 7px; }
-
-.trust-item small { display: block; margin-top: 5px; color: var(--muted); font-weight: 400; }
-
-footer {
-  padding: 35px 0;
-  background: var(--deep);
-  color: white;
-}
-
-.footer-inner {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px;
-  align-items: center;
-}
-
-footer p { color: #d2dfd0; font-size: 13px; }
-
-footer a { color: #e2d5a9; }
-
-.toast {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  z-index: 50;
-  transform: translate(-50%, 20px);
-  opacity: 0;
-  pointer-events: none;
-  padding: 12px 18px;
-  border-radius: 12px;
-  color: white;
-  background: var(--deep);
-  box-shadow: 0 10px 25px #0003;
-  transition: .25s;
-  max-width: 90%;
-  text-align: center;
-}
-
-.toast.show { opacity: 1; transform: translate(-50%, 0); }
-
-@media (max-width: 850px) {
-  nav { gap: 12px; }
-  nav a { font-size: 11px; }
-  .cards { grid-template-columns: repeat(2, minmax(0,1fr)); }
-  .feature-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
-  .feature:last-child { grid-column: 1/-1; }
-}
-
-@media (max-width: 600px) {
-  .nav { padding: 14px 0; flex-wrap: wrap; }
-  nav { order: 3; width: 100%; overflow-x: auto; padding: 8px 0; }
-  nav a { white-space: nowrap; font-size: 12px; }
-  .hero { min-height: 480px; background-position: center; }
-  .hero-inner { padding: 65px 0 80px; }
-  h1 { font-size: clamp(42px, 12vw, 60px); }
-  .search-box { grid-template-columns: 1fr; }
-  .search-box .btn { width: 100%; }
-  .cards, .feature-grid, .tool-grid { grid-template-columns: 1fr; }
-  .feature:last-child { grid-column: auto; }
-  .card-image { height: 220px; }
-  .section-head { align-items: start; }
-  .section-head h2 { font-size: 27px; }
-  .trust-grid { grid-template-columns: repeat(2,1fr); }
-  .form-grid { grid-template-columns: 1fr; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    scroll-behavior: auto !important;
-    transition-duration: .01ms !important;
-    animation-duration: .01ms !important;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173c2c">
+  <meta name="description" content="Discover India's hidden places with TwoTrail A&H. Explore destinations, plan trips, and find your next adventure.">
+  <title>TwoTrail A&H — Find Your Hidden India</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --forest: #173c2c;
+      --forest-dark: #102b20;
+      --green: #315e45;
+      --sage: #dce6d6;
+      --cream: #f7f5ed;
+      --paper: #fffdf7;
+      --gold: #c89a53;
+      --text: #23372c;
+      --muted: #738074;
+      --border: rgba(35, 55, 44, .12);
+      --shadow: 0 18px 45px rgba(24, 53, 37, .10);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.6;
+    }
+
+    body, button, input, select { font-family: "DM Sans", sans-serif; }
+
+    button, a, input, select { -webkit-tap-highlight-color: transparent; }
+
+    button { cursor: pointer; }
+
+    a { color: inherit; text-decoration: none; }
+
+    img { display: block; max-width: 100%; }
+
+    .container {
+      width: min(1160px, calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .eyebrow {
+      color: var(--green);
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: .17em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 {
+      font-family: "Playfair Display", Georgia, serif;
+      line-height: 1.13;
+      font-weight: 600;
+    }
+
+    h2 {
+      margin: 10px 0 12px;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      letter-spacing: -.035em;
+    }
+
+    .section-intro {
+      max-width: 620px;
+      color: var(--muted);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 13px 21px;
+      font-weight: 700;
+      font-size: .9rem;
+      transition: transform .2s, background .2s, box-shadow .2s;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--forest);
+      color: white;
+      box-shadow: 0 8px 22px rgba(23, 60, 44, .17);
+    }
+
+    .btn-primary:hover { background: var(--green); }
+
+    .btn-light {
+      color: var(--forest);
+      background: var(--paper);
+    }
+
+    .btn-outline {
+      border-color: var(--border);
+      background: transparent;
+      color: var(--forest);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(35, 55, 44, .08);
+      background: rgba(247, 245, 237, .94);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 700;
+      color: var(--forest);
+      letter-spacing: -.03em;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 15px;
+      background: var(--forest);
+      color: white;
+      font-size: 1.1rem;
+    }
+
+    .brand-name { font-size: 1.06rem; }
+    .brand-sub { display: block; color: var(--muted); font-size: .68rem; letter-spacing: .08em; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      font-size: .87rem;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover { color: var(--green); }
+
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 9px 12px;
+      color: var(--forest);
+      font-size: 1.15rem;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 620px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      color: white;
+      background: var(--forest);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(12, 37, 26, .88) 0%, rgba(12, 37, 26, .55) 49%, rgba(12, 37, 26, .10) 100%),
+        linear-gradient(0deg, rgba(12, 37, 26, .38), transparent 45%),
+        url("https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=2200&q=85") center 48% / cover;
+      transform: scale(1.02);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      padding-block: 100px;
+    }
+
+    .hero .eyebrow { color: #d9c18f; }
+
+    .hero h1 {
+      margin: 19px 0;
+      max-width: 760px;
+      font-size: clamp(3rem, 7.7vw, 6.1rem);
+      letter-spacing: -.055em;
+    }
+
+    .hero h1 em {
+      color: #d6dfc8;
+      font-weight: 500;
+    }
+
+    .hero p {
+      max-width: 560px;
+      color: rgba(255, 255, 255, .84);
+      font-size: 1.04rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 27px;
+    }
+
+    .hero-note {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 40px;
+      color: rgba(255, 255, 255, .8);
+      font-size: .82rem;
+    }
+
+    .hero-note span { color: #e6c58c; }
+
+    .quick-search-wrap {
+      position: relative;
+      z-index: 3;
+      margin-top: -35px;
+    }
+
+    .quick-search {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr auto;
+      gap: 13px;
+      align-items: end;
+      padding: 22px;
+      border: 1px solid rgba(35, 55, 44, .07);
+      border-radius: 23px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .field label {
+      display: block;
+      margin: 0 0 7px 3px;
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 700;
+    }
+
+    .field input, .field select {
+      width: 100%;
+      min-height: 47px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      outline: none;
+      padding: 12px 14px;
+      background: white;
+      color: var(--text);
+      font-size: .9rem;
+    }
+
+    .field input:focus, .field select:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(49, 94, 69, .1);
+    }
+
+    section { padding: 90px 0; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 34px;
+    }
+
+    .stat {
+      border-left: 2px solid var(--gold);
+      padding: 4px 0 4px 17px;
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--forest);
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 1.75rem;
+    }
+
+    .stat span { color: var(--muted); font-size: .8rem; }
+
+    .explorer-section {
+      background: #eaeedf;
+    }
+
+    .explorer-layout {
+      display: grid;
+      grid-template-columns: .82fr 1.18fr;
+      gap: 35px;
+      align-items: stretch;
+    }
+
+    .explorer-copy {
+      padding: 20px 0;
+    }
+
+    .explorer-copy p { color: var(--muted); }
+
+    .explorer-hint {
+      margin: 24px 0;
+      padding: 16px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, .58);
+      font-size: .88rem;
+    }
+
+    .map-panel {
+      position: relative;
+      min-height: 470px;
+      overflow: hidden;
+      border: 1px solid rgba(23, 60, 44, .09);
+      border-radius: 28px;
+      background:
+        radial-gradient(ellipse at 60% 42%, rgba(255, 255, 255, .9), transparent 65%),
+        linear-gradient(145deg, #dbe5d2, #c3d5bd);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .map-grid {
+      position: absolute;
+      inset: 0;
+      opacity: .32;
+      background-image:
+        linear-gradient(rgba(49, 94, 69, .11) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(49, 94, 69, .11) 1px, transparent 1px);
+      background-size: 35px 35px;
+    }
+
+    .map-label {
+      position: absolute;
+      top: 23px;
+      left: 24px;
+      z-index: 2;
+      color: var(--forest);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .india-silhouette {
+      position: absolute;
+      left: 50%;
+      top: 49%;
+      width: 53%;
+      height: 76%;
+      transform: translate(-50%, -50%) rotate(-3deg);
+      background: linear-gradient(145deg, #f9f5e8, #d6e0cb);
+      border: 2px solid rgba(49, 94, 69, .3);
+      clip-path: polygon(
+        22% 0%, 39% 5%, 48% 15%, 65% 17%, 73% 27%,
+        84% 32%, 78% 43%, 87% 51%, 77% 62%, 70% 68%,
+        63% 80%, 55% 95%, 47% 100%, 40% 84%, 31% 75%,
+        25% 61%, 13% 52%, 18% 39%, 7% 29%, 17% 20%
+      );
+      filter: drop-shadow(8px 15px 12px rgba(23, 60, 44, .12));
+    }
+
+    .map-river {
+      position: absolute;
+      left: 42%;
+      top: 17%;
+      width: 18%;
+      height: 59%;
+      border-right: 3px solid rgba(100, 157, 174, .45);
+      border-radius: 50%;
+      transform: rotate(-20deg);
+      pointer-events: none;
+    }
+
+    .map-pin {
+      position: absolute;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(23, 60, 44, .15);
+      border-radius: 999px;
+      padding: 7px 10px;
+      background: white;
+      color: var(--forest);
+      box-shadow: 0 6px 18px rgba(23, 60, 44, .13);
+      font-size: .72rem;
+      font-weight: 700;
+      transition: transform .2s, background .2s;
+    }
+
+    .map-pin:hover, .map-pin.active {
+      transform: scale(1.08);
+      background: var(--forest);
+      color: white;
+    }
+
+    .pin-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .pin-himachal { top: 20%; left: 30%; }
+    .pin-rajasthan { top: 38%; left: 18%; }
+    .pin-northeast { top: 34%; right: 5%; }
+    .pin-mp { top: 49%; left: 40%; }
+    .pin-karnataka { top: 69%; left: 38%; }
+    .pin-kerala { bottom: 8%; left: 34%; }
+    .pin-ladakh { top: 9%; left: 46%; }
+
+    .map-caption {
+      position: absolute;
+      z-index: 3;
+      right: 16px;
+      bottom: 16px;
+      max-width: 190px;
+      border-radius: 14px;
+      padding: 12px 15px;
+      background: rgba(255, 253, 247, .94);
+      color: var(--forest);
+      font-size: .75rem;
+      box-shadow: 0 6px 20px rgba(23, 60, 44, .1);
+    }
+
+    .destinations-section { background: var(--cream); }
+
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 27px;
+    }
+
+    .filter-btn {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 9px 16px;
+      background: transparent;
+      color: var(--text);
+      font-size: .81rem;
+      font-weight: 600;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      border-color: var(--forest);
+      background: var(--forest);
+      color: white;
+    }
+
+    .destination-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 23px;
+    }
+
+    .destination-card {
+      overflow: hidden;
+      border: 1px solid rgba(35, 55, 44, .08);
+      border-radius: 20px;
+      background: var(--paper);
+      box-shadow: 0 7px 25px rgba(24, 53, 37, .045);
+      transition: transform .25s, box-shadow .25s;
+      transform-style: preserve-3d;
+    }
+
+    .destination-card:hover {
+      transform: translateY(-7px) rotateX(1deg);
+      box-shadow: 0 20px 40px rgba(24, 53, 37, .12);
+    }
+
+    .card-image {
+      position: relative;
+      height: 230px;
+      overflow: hidden;
+      background: var(--sage);
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .6s;
+    }
+
+    .destination-card:hover .card-image img { transform: scale(1.06); }
+
+    .card-tag {
+      position: absolute;
+      top: 13px;
+      left: 13px;
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: rgba(255, 253, 247, .94);
+      color: var(--forest);
+      font-size: .7rem;
+      font-weight: 700;
+    }
+
+    .favorite-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255, 253, 247, .95);
+      color: var(--forest);
+      font-size: 1.12rem;
+    }
+
+    .favorite-btn.saved { background: #fff0e9; color: #c45b43; }
+
+    .card-body { padding: 20px; }
+
+    .card-location {
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 600;
+    }
+
+    .card-body h3 { margin: 7px 0 8px; font-size: 1.5rem; }
+
+    .card-body p {
+      min-height: 51px;
+      margin: 0 0 17px;
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+
+    .cost { color: var(--forest); font-size: .81rem; font-weight: 700; }
+
+    .text-btn {
+      border: none;
+      background: transparent;
+      color: var(--green);
+      font-size: .82rem;
+      font-weight: 700;
+    }
+
+    .no-results {
+      grid-column: 1 / -1;
+      border: 1px dashed var(--border);
+      border-radius: 18px;
+      padding: 45px 20px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .mood-section {
+      background: var(--forest);
+      color: white;
+    }
+
+    .mood-section .eyebrow { color: #d6c18e; }
+    .mood-section .section-intro { color: rgba(255, 255, 255, .7); }
+
+    .mood-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .mood-card {
+      min-height: 150px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      border: 1px solid rgba(255, 255, 255, .17);
+      border-radius: 18px;
+      padding: 20px;
+      background: rgba(255, 255, 255, .055);
+      color: white;
+      text-align: left;
+      transition: transform .2s, background .2s;
+    }
+
+    .mood-card:hover, .mood-card.active {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, .14);
+    }
+
+    .mood-icon { font-size: 1.8rem; }
+    .mood-card strong { font-size: .97rem; }
+    .mood-card span:last-child { color: rgba(255,255,255,.7); font-size: .78rem; }
+
+    .planner-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .planner-box {
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 26px;
+      background: var(--paper);
+      box-shadow: 0 8px 25px rgba(24, 53, 37, .04);
+    }
+
+    .planner-box h3 { margin-top: 0; font-size: 1.65rem; }
+
+    .planner-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .planner-fields .full { grid-column: 1 / -1; }
+
+    .budget-result {
+      margin-top: 18px;
+      border-radius: 16px;
+      padding: 18px;
+      background: var(--sage);
+    }
+
+    .budget-result span { display: block; color: var(--muted); font-size: .8rem; }
+    .budget-result strong { color: var(--forest); font-size: 1.8rem; }
+
+    .trip-list {
+      display: grid;
+      gap: 10px;
+      margin: 17px 0;
+    }
+
+    .trip-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 12px 14px;
+      background: white;
+    }
+
+    .trip-item strong { display: block; font-size: .9rem; }
+    .trip-item small { color: var(--muted); }
+
+    .remove-trip {
+      border: none;
+      border-radius: 8px;
+      padding: 7px 9px;
+      background: #f8e9e3;
+      color: #9a4935;
+      font-weight: 700;
+    }
+
+    .empty-trip {
+      border: 1px dashed var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      color: var(--muted);
+      text-align: center;
+      font-size: .86rem;
+    }
+
+    .planner-actions { display: flex; flex-wrap: wrap; gap: 9px; }
+
+    .note {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: .76rem;
+    }
+
+    .closing {
+      position: relative;
+      overflow: hidden;
+      padding: 80px 0;
+      background:
+        linear-gradient(90deg, rgba(16, 43, 32, .91), rgba(16, 43, 32, .65)),
+        url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=80") center / cover;
+      color: white;
+      text-align: center;
+    }
+
+    .closing h2 { max-width: 700px; margin-inline: auto; }
+    .closing p { max-width: 560px; margin: 16px auto 25px; color: rgba(255,255,255,.78); }
+
+    footer {
+      padding: 32px 0;
+      background: #102b20;
+      color: rgba(255,255,255,.78);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand { color: white; font-weight: 700; }
+    .footer-small { font-size: .78rem; }
+
+    .toast {
+      position: fixed;
+      z-index: 100;
+      right: 20px;
+      bottom: 20px;
+      max-width: min(370px, calc(100vw - 40px));
+      border-radius: 14px;
+      padding: 14px 18px;
+      background: var(--forest-dark);
+      color: white;
+      box-shadow: var(--shadow);
+      font-size: .87rem;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: opacity .2s, transform .2s;
+    }
+
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        background: var(--cream);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+      }
+
+      .nav-links.open { display: flex; }
+      .menu-toggle { display: block; }
+      .explorer-layout { grid-template-columns: 1fr; }
+      .explorer-copy { padding-bottom: 0; }
+      .destination-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .mood-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 650px) {
+      .container { width: min(100% - 28px, 1160px); }
+      .nav { min-height: 68px; }
+      .nav-links { top: 68px; }
+      .brand-mark { width: 38px; height: 38px; }
+      .hero { min-height: 570px; }
+      .hero-content { padding-block: 75px; }
+      .hero h1 { font-size: clamp(2.8rem, 13vw, 4.3rem); }
+      .quick-search { grid-template-columns: 1fr; padding: 17px; }
+      .quick-search-wrap { margin-top: -25px; }
+      section { padding: 65px 0; }
+      .section-head { align-items: flex-start; flex-direction: column; gap: 8px; }
+      .stats { gap: 9px; }
+      .stat { padding-left: 10px; }
+      .stat strong { font-size: 1.35rem; }
+      .stat span { font-size: .7rem; }
+      .map-panel { min-height: 400px; }
+      .india-silhouette { width: 62%; height: 67%; }
+      .map-pin { padding: 6px 8px; font-size: .65rem; }
+      .pin-himachal { top: 22%; left: 20%; }
+      .pin-rajasthan { top: 39%; left: 3%; }
+      .pin-northeast { top: 36%; right: 2%; }
+      .pin-mp { top: 49%; left: 33%; }
+      .pin-karnataka { top: 68%; left: 30%; }
+      .pin-kerala { bottom: 8%; left: 20%; }
+      .pin-ladakh { top: 10%; left: 40%; }
+      .map-caption { max-width: 150px; font-size: .68rem; }
+      .destination-grid { grid-template-columns: 1fr; }
+      .card-image { height: 240px; }
+      .mood-grid { gap: 10px; }
+      .mood-card { min-height: 135px; padding: 15px; }
+      .planner-layout { grid-template-columns: 1fr; }
+      .planner-box { padding: 20px; }
+      .planner-fields { grid-template-columns: 1fr; }
+      .planner-fields .full { grid-column: auto; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
-<header>
-  <div class="wrap nav">
-    <a class="brand" href="#home" aria-label="TwoTrail A&H home">
-      ⛰ TwoTrail <span>A&H</span>
-      <small>DISCOVER · EXPLORE · EXPERIENCE</small>
-    </a>
-    <nav aria-label="Main navigation">
-      <a href="#home">Home</a>
-      <a href="#destinations">Destinations</a>
-      <a href="#hidden">Hidden Gems</a>
-      <a href="#planner">Trip Planner</a>
-      <a href="#budget">Budget</a>
-    </nav>
-    <button class="nav-fav" id="showFavorites" type="button">♡ Favourites <span id="favCount">0</span></button>
-  </div>
-</header>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="TwoTrail A&H home">
+        <span class="brand-mark">✦</span>
+        <span>
+          <span class="brand-name">TwoTrail A&H</span>
+          <span class="brand-sub">FIND YOUR HIDDEN INDIA</span>
+        </span>
+      </a>
 
-<main>
-  <section class="hero" id="home">
-    <div class="wrap hero-inner">
-      <div class="eyebrow">India's hidden travel universe</div>
-      <h1>Discover the India <em>Beyond the Obvious.</em></h1>
-      <p>From mist-covered mountains and hidden waterfalls to peaceful villages and ancient heritage—discover extraordinary places across India, one journey at a time.</p>
-      <div class="actions">
-        <a class="btn btn-gold" href="#destinations">Explore destinations ↗</a>
-        <button class="btn btn-outline" id="heroSurprise" type="button">✦ Surprise me, India!</button>
-      </div>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#explorer">Explore India</a>
+        <a href="#destinations">Destinations</a>
+        <a href="#moods">Find Your Mood</a>
+        <a href="#planner">Trip Planner</a>
+      </nav>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     </div>
-  </section>
+  </header>
 
-  <div class="wrap search-shell">
-    <form class="search-box" id="searchForm">
-      <input id="searchInput" type="search" placeholder="Search destinations, states, villages..." aria-label="Search destinations">
-      <select id="stateFilter" aria-label="Filter by state">
-        <option value="">All states</option>
-      </select>
-      <button class="btn" type="submit">Find places →</button>
-    </form>
-  </div>
-
-  <div class="wrap">
-    <div class="categories" id="categories" aria-label="Destination categories">
-      <button class="category active" data-category=""><span>🌏</span>All places</button>
-      <button class="category" data-category="Mountains"><span>🏔️</span>Mountains</button>
-      <button class="category" data-category="Waterfalls"><span>💧</span>Waterfalls</button>
-      <button class="category" data-category="Forests"><span>🌲</span>Forests</button>
-      <button class="category" data-category="Lakes"><span>🌊</span>Lakes</button>
-      <button class="category" data-category="Villages"><span>🏡</span>Villages</button>
-      <button class="category" data-category="Beaches"><span>🏝️</span>Beaches</button>
-      <button class="category" data-category="Heritage"><span>🏛️</span>Heritage</button>
-      <button class="category" data-category="Culture"><span>🪷</span>Culture</button>
-    </div>
-  </div>
-
-  <section id="destinations">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <h2>Places worth discovering</h2>
-          <p>Handpicked inspiration for your next Indian adventure.</p>
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-bg" role="img" aria-label="Beautiful wilderness landscape"></div>
+      <div class="container hero-content">
+        <div class="eyebrow">A little beyond the ordinary</div>
+        <h1>Find your own<br><em>kind of India.</em></h1>
+        <p>
+          Quiet mountain villages, misty forests, secret lakes and stories
+          waiting around the next bend. Your next adventure starts here.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-light" href="#destinations">Explore destinations ↗</a>
+          <button class="btn btn-primary" id="surpriseButton">✦ Surprise me</button>
         </div>
-        <button class="text-btn" id="resetFilters" type="button">View all ↗</button>
+        <div class="hero-note"><span>✦</span> Made for the curious, not just the crowds.</div>
       </div>
-      <div class="cards" id="destinationCards" aria-live="polite"></div>
-    </div>
-  </section>
+    </section>
 
-  <section id="hidden">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <h2>Find your kind of escape</h2>
-          <p>Step away from the ordinary and discover something new.</p>
+    <div class="container quick-search-wrap">
+      <form class="quick-search" id="searchForm">
+        <div class="field">
+          <label for="searchInput">WHERE DO YOU WANT TO GO?</label>
+          <input id="searchInput" type="search" placeholder="Try mountains, Coorg, waterfalls…" autocomplete="off">
         </div>
-      </div>
-      <div class="feature-grid">
-        <article class="feature">
-          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=80" alt="Mountain peaks surrounded by clouds" loading="lazy">
-          <div class="eyebrow">Your next adventure</div>
-          <h3>Surprise Me, India!</h3>
-          <p>Let us pick a destination from our collection of Indian places.</p>
-          <button class="btn btn-gold" id="surpriseButton" type="button">Discover a place →</button>
-        </article>
-        <article class="feature">
-          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80" alt="Sunlight through a green forest" loading="lazy">
-          <div class="eyebrow">Choose your mood</div>
-          <h3>Find My Perfect Escape</h3>
-          <p>Pick the kind of landscape you love and explore matching destinations.</p>
-          <label for="moodSelect">What would you love to see?</label>
-          <select id="moodSelect" style="margin:10px 0;padding:11px;border-radius:9px;max-width:100%">
-            <option value="Mountains">Peaceful mountains</option>
-            <option value="Waterfalls">Hidden waterfalls</option>
-            <option value="Forests">Lush forests</option>
-            <option value="Lakes">Quiet lakes</option>
-            <option value="Heritage">History and heritage</option>
-            <option value="Beaches">Beautiful beaches</option>
+        <div class="field">
+          <label for="stateSelect">EXPLORE A REGION</label>
+          <select id="stateSelect">
+            <option value="all">Everywhere in India</option>
           </select>
-          <button class="btn btn-gold" id="moodButton" type="button">Find my escape →</button>
-        </article>
-        <article class="feature">
-          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Scenic landscape on a journey" loading="lazy">
-          <div class="eyebrow">Plan with confidence</div>
-          <h3>Your Journey, Your Way</h3>
-          <p>Build a personal list of places to visit and estimate your trip costs.</p>
-          <a class="btn btn-gold" href="#planner">Start planning →</a>
-        </article>
-      </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Find places ↗</button>
+      </form>
     </div>
-  </section>
 
-  <section>
-    <div class="wrap tool-grid">
-      <div class="tool" id="budget">
-        <div class="eyebrow">Plan your spending</div>
-        <h3>💰 Travel Budget Calculator</h3>
-        <p>Estimate a trip budget for your group. These are planning estimates, not live quotes.</p>
-        <form id="budgetForm">
-          <div class="form-grid">
-            <div class="field">
-              <label for="travellers">Number of travellers</label>
-              <input id="travellers" type="number" min="1" max="30" value="2" required>
-            </div>
-            <div class="field">
-              <label for="days">Trip length (days)</label>
-              <input id="days" type="number" min="1" max="60" value="3" required>
-            </div>
-            <div class="field">
-              <label for="stayCost">Stay per person/night (₹)</label>
-              <input id="stayCost" type="number" min="0" max="1000000" value="1200" required>
-            </div>
-            <div class="field">
-              <label for="foodCost">Food per person/day (₹)</label>
-              <input id="foodCost" type="number" min="0" max="100000" value="500" required>
-            </div>
-            <div class="field" style="grid-column:1/-1">
-              <label for="transportCost">Total transport for the group (₹)</label>
-              <input id="transportCost" type="number" min="0" max="100000000" value="3000" required>
-            </div>
-          </div>
-          <button class="btn" style="margin-top:16px" type="submit">Calculate estimate →</button>
-        </form>
-        <div class="result" id="budgetResult" aria-live="polite">Your estimated trip cost will appear here.</div>
+    <section id="intro">
+      <div class="container">
+        <div class="eyebrow">Travel differently</div>
+        <h2>India has more stories<br>than you can imagine.</h2>
+        <p class="section-intro">
+          From Himalayan hideaways to ancient towns and slow coastal escapes,
+          discover places that make you pause, look around, and stay a little longer.
+        </p>
+        <div class="stats">
+          <div class="stat"><strong>Mountains</strong><span>High-altitude escapes</span></div>
+          <div class="stat"><strong>Wild places</strong><span>Nature worth protecting</span></div>
+          <div class="stat"><strong>Slow travel</strong><span>Journeys with meaning</span></div>
+        </div>
       </div>
+    </section>
 
-      <div class="tool" id="planner">
-        <div class="eyebrow">Create your own route</div>
-        <h3>🗺️ My Trip Planner</h3>
-        <p>Make a personal itinerary by adding destinations from our collection. Your list is saved in this browser.</p>
-        <form id="plannerForm">
-          <div class="field">
-            <label for="placeSelect">Choose a destination</label>
-            <select id="placeSelect"></select>
+    <section class="explorer-section" id="explorer">
+      <div class="container explorer-layout">
+        <div class="explorer-copy">
+          <div class="eyebrow">Your visual guide</div>
+          <h2>Explore India,<br>one discovery at a time.</h2>
+          <p>
+            Choose a region on the map-style explorer to find destinations,
+            or jump straight to a place that catches your eye.
+          </p>
+          <div class="explorer-hint">
+            <strong>✦ How it works</strong><br>
+            Select any region marker. The destination list will update to show
+            places associated with that region.
           </div>
-          <div class="actions">
-            <button class="btn" type="submit">Add to my trip +</button>
-            <button class="btn btn-outline" id="clearTrip" type="button" style="color:var(--forest);border-color:#b9c8b6">Clear trip</button>
-          </div>
-        </form>
-        <ol class="planner-list" id="tripList" aria-live="polite"></ol>
-        <div class="result" id="tripSummary">Your itinerary is ready to begin.</div>
-        <button class="btn" id="downloadTrip" type="button" style="margin-top:12px">Download itinerary</button>
+          <a class="btn btn-primary" href="#destinations">Browse all destinations ↗</a>
+        </div>
+
+        <div class="map-panel" aria-label="Interactive illustrated map of India">
+          <div class="map-grid"></div>
+          <div class="map-label">Discover India · Select a region</div>
+          <div class="india-silhouette" aria-hidden="true"></div>
+          <div class="map-river" aria-hidden="true"></div>
+
+          <button class="map-pin pin-ladakh" data-region="Ladakh"><span class="pin-dot"></span>Ladakh</button>
+          <button class="map-pin pin-himachal" data-region="Himachal Pradesh"><span class="pin-dot"></span>Himachal</button>
+          <button class="map-pin pin-rajasthan" data-region="Rajasthan"><span class="pin-dot"></span>Rajasthan</button>
+          <button class="map-pin pin-northeast" data-region="Arunachal Pradesh"><span class="pin-dot"></span>Northeast</button>
+          <button class="map-pin pin-mp" data-region="Madhya Pradesh"><span class="pin-dot"></span>Central India</button>
+          <button class="map-pin pin-karnataka" data-region="Karnataka"><span class="pin-dot"></span>Karnataka</button>
+          <button class="map-pin pin-kerala" data-region="Kerala"><span class="pin-dot"></span>Kerala</button>
+
+          <div class="map-caption" id="mapCaption">Pick a region to uncover places worth exploring.</div>
+        </div>
       </div>
+    </section>
+
+    <section class="destinations-section" id="destinations">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Handpicked places</div>
+            <h2>Somewhere worth getting lost.</h2>
+            <p class="section-intro">Start with these destinations, then save your favourites and build a trip of your own.</p>
+          </div>
+          <button class="btn btn-outline" id="resetFilters">Reset filters ↺</button>
+        </div>
+
+        <div class="filter-row" id="categoryFilters" aria-label="Filter destinations">
+          <button class="filter-btn active" data-category="all">All places</button>
+          <button class="filter-btn" data-category="Mountains">Mountains</button>
+          <button class="filter-btn" data-category="Nature">Nature</button>
+          <button class="filter-btn" data-category="Coast">Coast</button>
+          <button class="filter-btn" data-category="Culture">Culture</button>
+          <button class="filter-btn" data-category="Quiet escapes">Quiet escapes</button>
+        </div>
+
+        <div class="destination-grid" id="destinationGrid"></div>
+      </div>
+    </section>
+
+    <section class="mood-section" id="moods">
+      <div class="container">
+        <div class="eyebrow">Follow your feeling</div>
+        <h2>What kind of escape<br>do you need?</h2>
+        <p class="section-intro">Sometimes the best way to choose a destination is to start with the feeling you're looking for.</p>
+
+        <div class="mood-grid">
+          <button class="mood-card" data-mood="Mountains">
+            <span class="mood-icon">🏔️</span>
+            <strong>Higher & quieter</strong>
+            <span>Mountain air and open skies ↗</span>
+          </button>
+          <button class="mood-card" data-mood="Nature">
+            <span class="mood-icon">🌿</span>
+            <strong>Into the wild</strong>
+            <span>Forests, falls and green trails ↗</span>
+          </button>
+          <button class="mood-card" data-mood="Coast">
+            <span class="mood-icon">🌊</span>
+            <strong>By the water</strong>
+            <span>Coastal calm and sea air ↗</span>
+          </button>
+          <button class="mood-card" data-mood="Culture">
+            <span class="mood-icon">🏛️</span>
+            <strong>Stories & history</strong>
+            <span>Old streets and living heritage ↗</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="planner">
+      <div class="container">
+        <div class="eyebrow">Make it your journey</div>
+        <h2>Your next trip, thoughtfully planned.</h2>
+        <p class="section-intro">Estimate a budget, collect destinations, and export a simple itinerary to keep your ideas together.</p>
+
+        <div class="planner-layout" style="margin-top:30px">
+          <div class="planner-box">
+            <h3>Trip budget estimator</h3>
+            <p class="section-intro">Change the values to estimate an illustrative budget in Indian rupees.</p>
+
+            <div class="planner-fields">
+              <div class="field">
+                <label for="travellers">TRAVELLERS</label>
+                <input id="travellers" type="number" min="1" max="20" value="2">
+              </div>
+              <div class="field">
+                <label for="days">TRIP DAYS</label>
+                <input id="days" type="number" min="1" max="60" value="4">
+              </div>
+              <div class="field">
+                <label for="stayCost">STAY / PERSON / NIGHT (₹)</label>
+                <input id="stayCost" type="number" min="0" max="100000" value="1500">
+              </div>
+              <div class="field">
+                <label for="foodCost">FOOD / PERSON / DAY (₹)</label>
+                <input id="foodCost" type="number" min="0" max="50000" value="700">
+              </div>
+              <div class="field full">
+                <label for="travelCost">TOTAL LOCAL TRANSPORT (₹)</label>
+                <input id="travelCost" type="number" min="0" max="1000000" value="3000">
+              </div>
+            </div>
+
+            <div class="budget-result" aria-live="polite">
+              <span>Estimated total budget</span>
+              <strong id="budgetTotal">₹20,600</strong>
+              <span id="budgetPerPerson">₹10,300 per person</span>
+            </div>
+            <p class="note">An estimate, not a quote. Actual costs vary by season, transport, availability, and personal choices.</p>
+          </div>
+
+          <div class="planner-box">
+            <h3>Your saved itinerary</h3>
+            <p class="section-intro">Add places from the destination cards and create a list for your next adventure.</p>
+
+            <div class="trip-list" id="tripList" aria-live="polite"></div>
+
+            <div class="planner-actions">
+              <button class="btn btn-primary" id="downloadTrip">Download itinerary ↓</button>
+              <button class="btn btn-outline" id="clearTrip">Clear list</button>
+            </div>
+            <p class="note">Your saved list is stored in this browser. It does not sync automatically across devices.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="container">
+        <div class="eyebrow" style="color:#e2c58e">The road is yours</div>
+        <h2>Take the scenic route.<br>Find the unexpected.</h2>
+        <p>Your next favourite place might be one you haven't heard of yet.</p>
+        <a class="btn btn-light" href="#destinations">Find your next trail ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-brand">✦ TwoTrail A&H</div>
+        <div class="footer-small">Find your hidden India.</div>
+      </div>
+      <div class="footer-small">Independent travel discovery · India</div>
+      <div class="footer-small">© <span id="year"></span> TwoTrail A&H</div>
     </div>
-  </section>
-</main>
+  </footer>
 
-<div class="trust">
-  <div class="wrap trust-grid">
-    <div class="trust-item"><span>🌿</span>Discover responsibly<small>Respect nature and local culture</small></div>
-    <div class="trust-item"><span>🧭</span>Explore thoughtfully<small>Research before travelling</small></div>
-    <div class="trust-item"><span>₹</span>Plan your budget<small>Understand estimated expenses</small></div>
-    <div class="trust-item"><span>♡</span>Keep your favourites<small>Save places in your browser</small></div>
-  </div>
-</div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<footer>
-  <div class="wrap footer-inner">
-    <div class="brand">⛰ TwoTrail <span>A&H</span><small>DISCOVER · EXPLORE · EXPERIENCE</small></div>
-    <p>Because the best stories are found beyond the obvious.</p>
-    <a href="#home">Back to the top ↑</a>
-  </div>
-</footer>
+  <script>
+    "use strict";
 
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+    const destinations = [
+      {
+        id: "jibhi",
+        name: "Jibhi",
+        state: "Himachal Pradesh",
+        category: "Mountains",
+        tags: ["Quiet escapes", "Nature"],
+        cost: 3500,
+        days: "2–4 days",
+        description: "A mountain hideaway of cedar forests, wooden homes and slow mornings.",
+        image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=80",
+        alt: "Mountain peaks under an open sky"
+      },
+      {
+        id: "tso-moriri",
+        name: "Tso Moriri",
+        state: "Ladakh",
+        category: "Mountains",
+        tags: ["Nature", "Quiet escapes"],
+        cost: 6500,
+        days: "3–5 days",
+        description: "A high-altitude lake surrounded by vast mountains and remarkable silence.",
+        image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=80",
+        alt: "Alpine lake surrounded by mountains"
+      },
+      {
+        id: "coorg",
+        name: "Coorg",
+        state: "Karnataka",
+        category: "Nature",
+        tags: ["Quiet escapes"],
+        cost: 4000,
+        days: "2–4 days",
+        description: "Green hills, coffee country, forest paths and misty mornings.",
+        image: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=900&q=80",
+        alt: "Sunlight filtering through a green forest"
+      },
+      {
+        id: "gokarna",
+        name: "Gokarna",
+        state: "Karnataka",
+        category: "Coast",
+        tags: ["Quiet escapes"],
+        cost: 3500,
+        days: "2–4 days",
+        description: "A relaxed coastal escape with sandy coves and a slower rhythm.",
+        image: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=80",
+        alt: "Ocean waves meeting the shore"
+      },
+      {
+        id: "hampi",
+        name: "Hampi",
+        state: "Karnataka",
+        category: "Culture",
+        tags: ["Quiet escapes"],
+        cost: 3000,
+        days: "2–3 days",
+        description: "Ancient ruins, dramatic boulders and a landscape full of history.",
+        image: "https://images.unsplash.com/photo-1600100397608-f010e9b7e6c5?auto=format&fit=crop&w=900&q=80",
+        alt: "Historic stone architecture in a warm landscape"
+      },
+      {
+        id: "tawang",
+        name: "Tawang",
+        state: "Arunachal Pradesh",
+        category: "Mountains",
+        tags: ["Culture", "Quiet escapes"],
+        cost: 6000,
+        days: "4–6 days",
+        description: "Mountain valleys, high passes and a rich Himalayan cultural heritage.",
+        image: "https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=900&q=80",
+        alt: "Layered mountain ranges in the distance"
+      },
+      {
+        id: "ziro",
+        name: "Ziro Valley",
+        state: "Arunachal Pradesh",
+        category: "Nature",
+        tags: ["Mountains", "Quiet escapes"],
+        cost: 5500,
+        days: "3–5 days",
+        description: "A peaceful valley of green fields, pine hills and distinctive local culture.",
+        image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=80",
+        alt: "Green valley with hills and a reflective lake"
+      },
+      {
+        id: "orchha",
+        name: "Orchha",
+        state: "Madhya Pradesh",
+        category: "Culture",
+        tags: ["Quiet escapes"],
+        cost: 2800,
+        days: "1–3 days",
+        description: "Riverside heritage, historic palaces and quiet streets with timeless character.",
+        image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=900&q=80",
+        alt: "Historic stone architecture"
+      },
+      {
+        id: "nokhalikai",
+        name: "Nohkalikai Falls",
+        state: "Meghalaya",
+        category: "Nature",
+        tags: ["Quiet escapes"],
+        cost: 4200,
+        days: "2–4 days",
+        description: "A spectacular waterfall set among the lush landscapes of Meghalaya.",
+        image: "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=900&q=80",
+        alt: "Waterfall surrounded by lush greenery"
+      },
+      {
+        id: "udaipur",
+        name: "Udaipur",
+        state: "Rajasthan",
+        category: "Culture",
+        tags: ["Quiet escapes"],
+        cost: 4500,
+        days: "2–4 days",
+        description: "Lakeside views, historic architecture and winding old-city streets.",
+        image: "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=900&q=80",
+        alt: "Historic architecture in a warm-toned landscape"
+      },
+      {
+        id: "munnar",
+        name: "Munnar",
+        state: "Kerala",
+        category: "Nature",
+        tags: ["Mountains", "Quiet escapes"],
+        cost: 3800,
+        days: "2–4 days",
+        description: "Rolling tea-covered hills, cool air and winding roads through green country.",
+        image: "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=900&q=80",
+        alt: "Green hills in a tropical mountain landscape"
+      }
+    ];
 
-<script>
-(() => {
-  "use strict";
+    const stateSelect = document.getElementById("stateSelect");
+    const searchInput = document.getElementById("searchInput");
+    const destinationGrid = document.getElementById("destinationGrid");
+    const toast = document.getElementById("toast");
 
-  const destinations = [
-    {
-      id:"jibhi", name:"Jibhi", state:"Himachal Pradesh",
-      category:"Mountains", tags:["Villages","Nature"],
-      description:"A forest-framed mountain village known for cedar trees, riverside walks and relaxed Himalayan scenery.",
-      image:"https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=900&q=80",
-      rating:"4.7", price:1800, badge:"Mountain escape"
-    },
-    {
-      id:"nongkhyllem", name:"Nohkalikai Falls", state:"Meghalaya",
-      category:"Waterfalls", tags:["Nature","Adventure"],
-      description:"A dramatic waterfall near Cherrapunji, best visited after checking local weather and access conditions.",
-      image:"https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=900&q=80",
-      rating:"4.8", price:1400, badge:"Waterfall wonder"
-    },
-    {
-      id:"tsomoriri", name:"Tso Moriri", state:"Ladakh",
-      category:"Lakes", tags:["Mountains","Wildlife"],
-      description:"A high-altitude lake surrounded by stark mountains and extraordinary open landscapes.",
-      image:"https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=80",
-      rating:"4.8", price:3200, badge:"High-altitude escape"
-    },
-    {
-      id:"coorg", name:"Coorg", state:"Karnataka",
-      category:"Forests", tags:["Coffee","Nature"],
-      description:"Explore coffee-growing hills, shaded trails, local food and green countryside.",
-      image:"https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=900&q=80",
-      rating:"4.6", price:2200, badge:"Green getaway"
-    },
-    {
-      id:"gokarna", name:"Gokarna", state:"Karnataka",
-      category:"Beaches", tags:["Relaxation","Coast"],
-      description:"A coastal town with beaches, rocky headlands and a quieter pace away from major city life.",
-      image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80",
-      rating:"4.6", price:2000, badge:"Coastal calm"
-    },
-    {
-      id:"hampi", name:"Hampi", state:"Karnataka",
-      category:"Heritage", tags:["History","Culture"],
-      description:"Explore extraordinary temple architecture, historic ruins and a landscape of giant boulders.",
-      image:"https://images.unsplash.com/photo-1600100397608-f0106bfa1c6a?auto=format&fit=crop&w=900&q=80",
-      rating:"4.8", price:1900, badge:"Living history"
-    },
-    {
-      id:"tawang", name:"Tawang", state:"Arunachal Pradesh",
-      category:"Mountains", tags:["Culture","Monasteries"],
-      description:"A Himalayan destination known for mountain scenery and rich monastery traditions. Check permits before travel.",
-      image:"https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=80",
-      rating:"4.7", price:2800, badge:"Himalayan culture"
-    },
-    {
-      id:"ziro", name:"Ziro Valley", state:"Arunachal Pradesh",
-      category:"Villages", tags:["Culture","Nature"],
-      description:"A scenic valley with agricultural landscapes and distinctive local cultural traditions.",
-      image:"https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=900&q=80",
-      rating:"4.6", price:2400, badge:"Valley discovery"
-    },
-    {
-      id:"orchha", name:"Orchha", state:"Madhya Pradesh",
-      category:"Heritage", tags:["History","Rivers"],
-      description:"A historic riverside town with palaces, cenotaphs and remarkable Bundela-era architecture.",
-      image:"https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=900&q=80",
-      rating:"4.6", price:1600, badge:"Heritage trails"
+    let activeCategory = "all";
+    let activeRegion = "all";
+    let activeMood = null;
+    let toastTimer;
+
+    function readStorage(key, fallback) {
+      try {
+        const value = localStorage.getItem(key);
+        return value ? JSON.parse(value) : fallback;
+      } catch (error) {
+        return fallback;
+      }
     }
-  ];
 
-  const $ = id => document.getElementById(id);
-  const validIds = new Set(destinations.map(d => d.id));
-  const safeRead = (key, fallback) => {
-    try {
-      const value = JSON.parse(localStorage.getItem(key));
-      return value === null ? fallback : value;
-    } catch (_) { return fallback; }
-  };
+    function writeStorage(key, value) {
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+      } catch (error) {
+        showToast("Your browser couldn't save this change.");
+      }
+    }
 
-  let favorites = safeRead("twotrail-favorites", []);
-  if (!Array.isArray(favorites)) favorites = [];
-  favorites = favorites.filter(id => validIds.has(id));
+    function getFavorites() {
+      return readStorage("twotrail-favorites", []);
+    }
 
-  let trip = safeRead("twotrail-trip", []);
-  if (!Array.isArray(trip)) trip = [];
-  trip = trip.filter(id => validIds.has(id));
+    function getTrip() {
+      return readStorage("twotrail-trip", []);
+    }
 
-  let category = "";
-  let favoritesOnly = false;
-  let searchTerm = "";
-  let selectedState = "";
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
+    }
 
-  function save(key, value) {
-    try { localStorage.setItem(key, JSON.stringify(value)); }
-    catch (_) { notify("Browser storage is unavailable; changes may not persist."); }
-  }
+    function formatRupees(amount) {
+      return new Intl.NumberFormat("en-IN", {
+        style: "currency",
+        currency: "INR",
+        maximumFractionDigits: 0
+      }).format(amount);
+    }
 
-  function notify(message) {
-    const toast = $("toast");
-    toast.textContent = message;
-    toast.classList.add("show");
-    clearTimeout(notify.timer);
-    notify.timer = setTimeout(() => toast.classList.remove("show"), 2600);
-  }
+    function populateStates() {
+      const states = [...new Set(destinations.map(place => place.state))].sort();
+      states.forEach(state => {
+        const option = document.createElement("option");
+        option.value = state;
+        option.textContent = state;
+        stateSelect.appendChild(option);
+      });
+    }
 
-  function escapeHTML(value) {
-    return String(value).replace(/[&<>"']/g, ch => ({
-      "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
-    })[ch]);
-  }
+    function filteredDestinations() {
+      const query = searchInput.value.trim().toLowerCase();
 
-  function cardHTML(d) {
-    const saved = favorites.includes(d.id);
-    return `
-      <article class="card">
-        <div class="card-image">
-          <img src="${d.image}" alt="${escapeHTML(d.name)} landscape" loading="lazy">
-          <span class="badge">${escapeHTML(d.badge)}</span>
-          <button class="heart ${saved ? "saved" : ""}" type="button"
-            data-favorite="${d.id}" aria-label="${saved ? "Remove from" : "Add to"} favourites"
-            aria-pressed="${saved}">${saved ? "♥" : "♡"}</button>
-        </div>
-        <div class="card-body">
-          <div class="location">⌖ ${escapeHTML(d.state)}</div>
-          <h3>${escapeHTML(d.name)}</h3>
-          <p>${escapeHTML(d.description)}</p>
-          <div class="tags">
-            <span class="tag">${escapeHTML(d.category)}</span>
-            ${d.tags.map(t => `<span class="tag">${escapeHTML(t)}</span>`).join("")}
-          </div>
-          <div class="card-bottom">
-            <span class="rating">★ ${escapeHTML(d.rating)} <span style="color:var(--muted);font-weight:400">editorial guide</span></span>
-            <span class="price">From ₹${d.price.toLocaleString("en-IN")}*</span>
-          </div>
-        </div>
-      </article>`;
-  }
+      return destinations.filter(place => {
+        const matchesQuery = !query || [
+          place.name,
+          place.state,
+          place.category,
+          place.description,
+          ...place.tags
+        ].join(" ").toLowerCase().includes(query);
 
-  function renderDestinations() {
-    const filtered = destinations.filter(d => {
-      const matchesCategory = !category || d.category === category || d.tags.includes(category);
-      const matchesSearch = !searchTerm ||
-        [d.name, d.state, d.category, d.description, ...d.tags]
-          .join(" ").toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesState = !selectedState || d.state === selectedState;
-      const matchesFav = !favoritesOnly || favorites.includes(d.id);
-      return matchesCategory && matchesSearch && matchesState && matchesFav;
+        const matchesState = activeRegion !== "all"
+          ? place.state === activeRegion
+          : stateSelect.value === "all" || place.state === stateSelect.value;
+
+        const matchesCategory = activeCategory === "all"
+          || place.category === activeCategory
+          || place.tags.includes(activeCategory);
+
+        const matchesMood = !activeMood
+          || place.category === activeMood
+          || place.tags.includes(activeMood);
+
+        return matchesQuery && matchesState && matchesCategory && matchesMood;
+      });
+    }
+
+    function renderDestinations() {
+      const results = filteredDestinations();
+      const favorites = getFavorites();
+
+      destinationGrid.replaceChildren();
+
+      if (!results.length) {
+        const empty = document.createElement("div");
+        empty.className = "no-results";
+        empty.textContent = "No places match those filters. Try another search or reset your filters.";
+        destinationGrid.appendChild(empty);
+        return;
+      }
+
+      results.forEach(place => {
+        const card = document.createElement("article");
+        card.className = "destination-card";
+
+        const imageWrap = document.createElement("div");
+        imageWrap.className = "card-image";
+
+        const img = document.createElement("img");
+        img.src = place.image;
+        img.alt = place.alt;
+        img.loading = "lazy";
+        img.onerror = () => {
+          img.style.display = "none";
+          imageWrap.style.background = "linear-gradient(145deg,#dce6d6,#b5c9b2)";
+          imageWrap.setAttribute("aria-label", place.alt + ". Image unavailable.");
+        };
+
+        const tag = document.createElement("span");
+        tag.className = "card-tag";
+        tag.textContent = place.category;
+
+        const fav = document.createElement("button");
+        fav.className = "favorite-btn" + (favorites.includes(place.id) ? " saved" : "");
+        fav.type = "button";
+        fav.textContent = favorites.includes(place.id) ? "♥" : "♡";
+        fav.setAttribute("aria-label", (favorites.includes(place.id) ? "Remove " : "Save ") + place.name + " " + (favorites.includes(place.id) ? "from" : "to") + " favorites");
+        fav.setAttribute("aria-pressed", String(favorites.includes(place.id)));
+        fav.addEventListener("click", () => toggleFavorite(place.id));
+
+        imageWrap.append(img, tag, fav);
+
+        const body = document.createElement("div");
+        body.className = "card-body";
+
+        const location = document.createElement("div");
+        location.className = "card-location";
+        location.textContent = "⌖ " + place.state + " · " + place.days;
+
+        const title = document.createElement("h3");
+        title.textContent = place.name;
+
+        const description = document.createElement("p");
+        description.textContent = place.description;
+
+        const footer = document.createElement("div");
+        footer.className = "card-footer";
+
+        const cost = document.createElement("span");
+        cost.className = "cost";
+        cost.textContent = "From " + formatRupees(place.cost) + " / person*";
+
+        const add = document.createElement("button");
+        add.className = "text-btn";
+        add.type = "button";
+        add.textContent = "Add to trip +";
+        add.addEventListener("click", () => addToTrip(place.id));
+
+        footer.append(cost, add);
+        body.append(location, title, description, footer);
+        card.append(imageWrap, body);
+        destinationGrid.appendChild(card);
+      });
+    }
+
+    function toggleFavorite(id) {
+      let favorites = getFavorites();
+
+      if (favorites.includes(id)) {
+        favorites = favorites.filter(item => item !== id);
+        showToast("Removed from your favourites.");
+      } else {
+        favorites.push(id);
+        showToast("Saved to your favourites ♥");
+      }
+
+      writeStorage("twotrail-favorites", favorites);
+      renderDestinations();
+    }
+
+    function addToTrip(id) {
+      const place = destinations.find(item => item.id === id);
+      if (!place) return;
+
+      const trip = getTrip();
+
+      if (trip.includes(id)) {
+        showToast(place.name + " is already in your itinerary.");
+        return;
+      }
+
+      trip.push(id);
+      writeStorage("twotrail-trip", trip);
+      renderTrip();
+      showToast(place.name + " added to your itinerary.");
+    }
+
+    function renderTrip() {
+      const tripList = document.getElementById("tripList");
+      const trip = getTrip();
+      tripList.replaceChildren();
+
+      if (!trip.length) {
+        const empty = document.createElement("div");
+        empty.className = "empty-trip";
+        empty.textContent = "Your itinerary is waiting. Add a destination from the cards above.";
+        tripList.appendChild(empty);
+        return;
+      }
+
+      trip.forEach(id => {
+        const place = destinations.find(item => item.id === id);
+        if (!place) return;
+
+        const row = document.createElement("div");
+        row.className = "trip-item";
+
+        const info = document.createElement("div");
+        const name = document.createElement("strong");
+        name.textContent = place.name;
+        const detail = document.createElement("small");
+        detail.textContent = place.state + " · " + place.days;
+        info.append(name, detail);
+
+        const remove = document.createElement("button");
+        remove.className = "remove-trip";
+        remove.type = "button";
+        remove.textContent = "Remove";
+        remove.setAttribute("aria-label", "Remove " + place.name + " from itinerary");
+        remove.addEventListener("click", () => {
+          writeStorage("twotrail-trip", getTrip().filter(item => item !== id));
+          renderTrip();
+          showToast("Destination removed.");
+        });
+
+        row.append(info, remove);
+        tripList.appendChild(row);
+      });
+    }
+
+    function setCategory(category) {
+      activeCategory = category;
+      activeMood = null;
+
+      document.querySelectorAll(".filter-btn").forEach(button => {
+        button.classList.toggle("active", button.dataset.category === category);
+      });
+
+      document.querySelectorAll(".mood-card").forEach(button => button.classList.remove("active"));
+      renderDestinations();
+    }
+
+    function resetFilters() {
+      activeCategory = "all";
+      activeRegion = "all";
+      activeMood = null;
+      searchInput.value = "";
+      stateSelect.value = "all";
+
+      document.querySelectorAll(".filter-btn").forEach(button => {
+        button.classList.toggle("active", button.dataset.category === "all");
+      });
+
+      document.querySelectorAll(".mood-card, .map-pin").forEach(button => button.classList.remove("active"));
+
+      document.getElementById("mapCaption").textContent = "Pick a region to uncover places worth exploring.";
+      renderDestinations();
+    }
+
+    function selectRegion(region) {
+      activeRegion = region;
+      activeMood = null;
+      activeCategory = "all";
+      stateSelect.value = "all";
+      searchInput.value = "";
+
+      document.querySelectorAll(".map-pin").forEach(button => {
+        button.classList.toggle("active", button.dataset.region === region);
+      });
+
+      document.querySelectorAll(".filter-btn").forEach(button => {
+        button.classList.toggle("active", button.dataset.category === "all");
+      });
+
+      document.querySelectorAll(".mood-card").forEach(button => button.classList.remove("active"));
+
+      document.getElementById("mapCaption").textContent =
+        "Exploring " + region + ". Matching destinations are shown below.";
+
+      renderDestinations();
+      document.getElementById("destinations").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function calculateBudget() {
+      const travellers = Math.min(20, Math.max(1, Number(document.getElementById("travellers").value) || 1));
+      const days = Math.min(60, Math.max(1, Number(document.getElementById("days").value) || 1));
+      const stay = Math.max(0, Number(document.getElementById("stayCost").value) || 0);
+      const food = Math.max(0, Number(document.getElementById("foodCost").value) || 0);
+      const transport = Math.max(0, Number(document.getElementById("travelCost").value) || 0);
+
+      const nights = Math.max(0, days - 1);
+      const total = travellers * nights * stay + travellers * days * food + transport;
+
+      document.getElementById("budgetTotal").textContent = formatRupees(total);
+      document.getElementById("budgetPerPerson").textContent =
+        formatRupees(total / travellers) + " per person";
+    }
+
+    function downloadItinerary() {
+      const trip = getTrip();
+      if (!trip.length) {
+        showToast("Add at least one destination first.");
+        return;
+      }
+
+      const lines = [
+        "TwoTrail A&H — My India Itinerary",
+        "===================================",
+        "",
+        "Created: " + new Date().toLocaleDateString("en-IN"),
+        ""
+      ];
+
+      trip.forEach((id, index) => {
+        const place = destinations.find(item => item.id === id);
+        if (!place) return;
+
+        lines.push(
+          (index + 1) + ". " + place.name,
+          "   Region: " + place.state,
+          "   Suggested duration: " + place.days,
+          "   Illustrative starting budget: " + formatRupees(place.cost) + " per person",
+          "   Notes: " + place.description,
+          ""
+        );
+      });
+
+      lines.push(
+        "Travel note: Verify transport, weather, local rules, permits and prices before departure.",
+        "Budget figures are illustrative and are not booking quotes."
+      );
+
+      const blob = new Blob([lines.join("\n")], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "twotrail-itinerary.txt";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+
+      showToast("Your itinerary file is ready.");
+    }
+
+    document.getElementById("menuToggle").addEventListener("click", () => {
+      const nav = document.getElementById("navLinks");
+      const open = nav.classList.toggle("open");
+      document.getElementById("menuToggle").setAttribute("aria-expanded", String(open));
+      document.getElementById("menuToggle").textContent = open ? "✕" : "☰";
     });
 
-    $("destinationCards").innerHTML = filtered.length
-      ? filtered.map(cardHTML).join("")
-      : `<div class="empty"><h3>No places found just yet</h3><p>Try another keyword, state or category.</p><button class="btn" id="emptyReset" type="button">Show all places</button></div>`;
+    document.querySelectorAll("#navLinks a").forEach(link => {
+      link.addEventListener("click", () => {
+        document.getElementById("navLinks").classList.remove("open");
+        document.getElementById("menuToggle").setAttribute("aria-expanded", "false");
+        document.getElementById("menuToggle").textContent = "☰";
+      });
+    });
 
-    $("favCount").textContent = favorites.length;
-    updateStateOptions();
-    updatePlaceOptions();
-  }
+    document.getElementById("searchForm").addEventListener("submit", event => {
+      event.preventDefault();
+      activeRegion = "all";
+      activeMood = null;
 
-  function updateStateOptions() {
-    const select = $("stateFilter");
-    const current = selectedState;
-    const states = [...new Set(destinations.map(d => d.state))].sort();
-    select.innerHTML = `<option value="">All states</option>` +
-      states.map(s => `<option value="${escapeHTML(s)}">${escapeHTML(s)}</option>`).join("");
-    select.value = current;
-  }
+      document.querySelectorAll(".map-pin, .mood-card").forEach(button => button.classList.remove("active"));
+      renderDestinations();
+      document.getElementById("destinations").scrollIntoView({ behavior: "smooth" });
+    });
 
-  function updatePlaceOptions() {
-    const select = $("placeSelect");
-    const current = select.value;
-    select.innerHTML = destinations.map(d =>
-      `<option value="${d.id}">${escapeHTML(d.name)} — ${escapeHTML(d.state)}</option>`
-    ).join("");
-    if (validIds.has(current)) select.value = current;
-  }
+    searchInput.addEventListener("input", () => {
+      activeRegion = "all";
+      document.querySelectorAll(".map-pin").forEach(button => button.classList.remove("active"));
+      renderDestinations();
+    });
 
-  function renderTrip() {
-    $("tripList").innerHTML = trip.length
-      ? trip.map((id, i) => {
-          const d = destinations.find(item => item.id === id);
-          return `<li>${i + 1}. ${escapeHTML(d.name)} <small>(${escapeHTML(d.state)})</small>
-            <button class="remove-stop" type="button" data-remove="${id}" aria-label="Remove ${escapeHTML(d.name)}">Remove</button></li>`;
-        }).join("")
-      : "<li>Your itinerary is empty. Add a place to begin.</li>";
+    stateSelect.addEventListener("change", () => {
+      activeRegion = "all";
+      document.querySelectorAll(".map-pin").forEach(button => button.classList.remove("active"));
+      renderDestinations();
+    });
 
-    $("tripSummary").textContent = trip.length
-      ? `Your itinerary contains ${trip.length} ${trip.length === 1 ? "destination" : "destinations"}. This is a saved place list, not a route-optimized itinerary.`
-      : "Your itinerary is ready to begin.";
+    document.querySelectorAll(".filter-btn").forEach(button => {
+      button.addEventListener("click", () => setCategory(button.dataset.category));
+    });
 
-    save("twotrail-trip", trip);
-  }
+    document.querySelectorAll(".map-pin").forEach(button => {
+      button.addEventListener("click", () => selectRegion(button.dataset.region));
+    });
 
-  function toggleFavorite(id) {
-    if (!validIds.has(id)) return;
-    favorites = favorites.includes(id)
-      ? favorites.filter(item => item !== id)
-      : [...favorites, id];
-    save("twotrail-favorites", favorites);
+    document.querySelectorAll(".mood-card").forEach(button => {
+      button.addEventListener("click", () => {
+        activeMood = button.dataset.mood;
+        activeRegion = "all";
+        activeCategory = "all";
+        stateSelect.value = "all";
+        searchInput.value = "";
+
+        document.querySelectorAll(".mood-card").forEach(card => {
+          card.classList.toggle("active", card === button);
+        });
+
+        document.querySelectorAll(".map-pin").forEach(pin => pin.classList.remove("active"));
+        document.querySelectorAll(".filter-btn").forEach(filter => {
+          filter.classList.toggle("active", filter.dataset.category === "all");
+        });
+
+        renderDestinations();
+        document.getElementById("destinations").scrollIntoView({ behavior: "smooth" });
+      });
+    });
+
+    document.getElementById("resetFilters").addEventListener("click", resetFilters);
+
+    document.getElementById("surpriseButton").addEventListener("click", () => {
+      const place = destinations[Math.floor(Math.random() * destinations.length)];
+      searchInput.value = place.name;
+      activeRegion = "all";
+      activeCategory = "all";
+      activeMood = null;
+      stateSelect.value = "all";
+
+      document.querySelectorAll(".filter-btn").forEach(button => {
+        button.classList.toggle("active", button.dataset.category === "all");
+      });
+
+      document.querySelectorAll(".mood-card, .map-pin").forEach(button => button.classList.remove("active"));
+
+      renderDestinations();
+      document.getElementById("destinations").scrollIntoView({ behavior: "smooth" });
+      showToast("Your next discovery: " + place.name + " ✦");
+    });
+
+    document.getElementById("downloadTrip").addEventListener("click", downloadItinerary);
+
+    document.getElementById("clearTrip").addEventListener("click", () => {
+      writeStorage("twotrail-trip", []);
+      renderTrip();
+      showToast("Your itinerary list has been cleared.");
+    });
+
+    ["travellers", "days", "stayCost", "foodCost", "travelCost"].forEach(id => {
+      document.getElementById(id).addEventListener("input", calculateBudget);
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    populateStates();
     renderDestinations();
-    notify(favorites.includes(id) ? "Added to your favourites ♥" : "Removed from favourites");
-  }
-
-  function surprise() {
-    const pool = destinations.filter(d =>
-      (!category || d.category === category || d.tags.includes(category)) &&
-      (!selectedState || d.state === selectedState)
-    );
-    const choices = pool.length ? pool : destinations;
-    const d = choices[Math.floor(Math.random() * choices.length)];
-    favoritesOnly = false;
-    searchTerm = "";
-    $("searchInput").value = "";
-    category = "";
-    selectedState = "";
-    document.querySelectorAll(".category").forEach(b =>
-      b.classList.toggle("active", b.dataset.category === "")
-    );
-    renderDestinations();
-    $("destinationCards").scrollIntoView({behavior:"smooth", block:"start"});
-    notify("Your next discovery: " + d.name + "!");
-  }
-
-  $("categories").addEventListener("click", event => {
-    const button = event.target.closest("[data-category]");
-    if (!button) return;
-    category = button.dataset.category;
-    favoritesOnly = false;
-    document.querySelectorAll(".category").forEach(b =>
-      b.classList.toggle("active", b === button)
-    );
-    renderDestinations();
-    $("destinations").scrollIntoView({behavior:"smooth", block:"start"});
-  });
-
-  $("destinationCards").addEventListener("click", event => {
-    const fav = event.target.closest("[data-favorite]");
-    if (fav) toggleFavorite(fav.dataset.favorite);
-    if (event.target.closest("#emptyReset")) resetFilters();
-  });
-
-  $("searchForm").addEventListener("submit", event => {
-    event.preventDefault();
-    searchTerm = $("searchInput").value.trim();
-    selectedState = $("stateFilter").value;
-    favoritesOnly = false;
-    renderDestinations();
-    $("destinations").scrollIntoView({behavior:"smooth", block:"start"});
-  });
-
-  $("stateFilter").addEventListener("change", () => {
-    selectedState = $("stateFilter").value;
-    renderDestinations();
-  });
-
-  function resetFilters() {
-    category = "";
-    searchTerm = "";
-    selectedState = "";
-    favoritesOnly = false;
-    $("searchInput").value = "";
-    $("stateFilter").value = "";
-    document.querySelectorAll(".category").forEach(b =>
-      b.classList.toggle("active", b.dataset.category === "")
-    );
-    renderDestinations();
-  }
-
-  $("resetFilters").addEventListener("click", resetFilters);
-  $("showFavorites").addEventListener("click", () => {
-    favoritesOnly = true;
-    category = "";
-    searchTerm = "";
-    selectedState = "";
-    $("searchInput").value = "";
-    $("stateFilter").value = "";
-    document.querySelectorAll(".category").forEach(b =>
-      b.classList.toggle("active", b.dataset.category === "")
-    );
-    renderDestinations();
-    $("destinations").scrollIntoView({behavior:"smooth", block:"start"});
-    if (!favorites.length) notify("Tap a heart on any destination to save it.");
-  });
-
-  $("heroSurprise").addEventListener("click", surprise);
-  $("surpriseButton").addEventListener("click", surprise);
-
-  $("moodButton").addEventListener("click", () => {
-    category = $("moodSelect").value;
-    favoritesOnly = false;
-    searchTerm = "";
-    selectedState = "";
-    $("searchInput").value = "";
-    $("stateFilter").value = "";
-    document.querySelectorAll(".category").forEach(b =>
-      b.classList.toggle("active", b.dataset.category === category)
-    );
-    renderDestinations();
-    $("destinations").scrollIntoView({behavior:"smooth", block:"start"});
-  });
-
-  $("budgetForm").addEventListener("submit", event => {
-    event.preventDefault();
-    const travellers = Number($("travellers").value);
-    const days = Number($("days").value);
-    const stay = Number($("stayCost").value);
-    const food = Number($("foodCost").value);
-    const transport = Number($("transportCost").value);
-    const values = [travellers, days, stay, food, transport];
-
-    if (values.some(v => !Number.isFinite(v) || v < 0) ||
-        travellers < 1 || travellers > 30 ||
-        days < 1 || days > 60 ||
-        stay > 1000000 || food > 100000 || transport > 100000000) {
-      $("budgetResult").textContent = "Please enter valid positive group and trip details.";
-      return;
-    }
-
-    const lodging = travellers * days * stay;
-    const meals = travellers * days * food;
-    const total = lodging + meals + transport;
-
-    $("budgetResult").innerHTML =
-      `Estimated group total: <strong>₹${total.toLocaleString("en-IN")}</strong><br>` +
-      `Stay: ₹${lodging.toLocaleString("en-IN")} · Food: ₹${meals.toLocaleString("en-IN")} · Transport: ₹${transport.toLocaleString("en-IN")}<br>` +
-      `Approx. per person: ₹${Math.round(total / travellers).toLocaleString("en-IN")}<br><small>Estimate only. Add any other costs such as permits, activities and emergency funds.</small>`;
-  });
-
-  $("plannerForm").addEventListener("submit", event => {
-    event.preventDefault();
-    const id = $("placeSelect").value;
-    if (!validIds.has(id)) return;
-    if (trip.includes(id)) {
-      notify("That destination is already in your itinerary.");
-      return;
-    }
-    trip.push(id);
     renderTrip();
-    notify("Destination added to your trip!");
-  });
-
-  $("tripList").addEventListener("click", event => {
-    const button = event.target.closest("[data-remove]");
-    if (!button) return;
-    trip = trip.filter(id => id !== button.dataset.remove);
-    renderTrip();
-  });
-
-  $("clearTrip").addEventListener("click", () => {
-    trip = [];
-    renderTrip();
-    notify("Your itinerary has been cleared.");
-  });
-
-  $("downloadTrip").addEventListener("click", () => {
-    if (!trip.length) {
-      notify("Add at least one destination before downloading.");
-      return;
-    }
-    const lines = [
-      "TwoTrail A&H — My India Trip",
-      "================================",
-      "",
-      ...trip.map((id, i) => {
-        const d = destinations.find(item => item.id === id);
-        return `${i + 1}. ${d.name} — ${d.state}\n   ${d.description}`;
-      }),
-      "",
-      "Please independently verify access, weather, permits, local guidance and travel costs before departure."
-    ];
-    const blob = new Blob([lines.join("\n")], {type:"text/plain;charset=utf-8"});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "twotrail-my-india-trip.txt";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
-  });
-
-  renderDestinations();
-  renderTrip();
-})();
-</script>
+    calculateBudget();
+  </script>
 </body>
 </html>
